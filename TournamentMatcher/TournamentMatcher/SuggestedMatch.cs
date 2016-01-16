@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace TournamentMatcher
 {
+    [DebuggerDisplay("Match:{Team1.Player1.Name} + {Team1.Player2.Name} vs {Team2.Player1.Name} + {Team2.Player2.Name} | Hcap: {HandicapDifference}" )]
     public class SuggestedMatch
     {
         public Team Team1;
@@ -13,10 +16,11 @@ namespace TournamentMatcher
         {
             Team1 = new Team(p1, p2);
             Team2 = new Team(p3, p4);
-            HandicapDifference = Team1.CompareHandicapWith(Team2);
+            Team1.AddOpponents(Team2);
+            HandicapDifference = Math.Abs(Team1.CompareHandicapWith(Team2));
         }
 
-        public static SuggestedMatch TakeFirstFourPlayers(List<Player> allPlayersRandomised, out List<Player> remainingPlayers)
+        public static SuggestedMatch CreateMatchFromFirstFirstFourPlayers(List<Player> allPlayersRandomised, out List<Player> remainingPlayers)
         {
             if (allPlayersRandomised.Count < 4)
             {
@@ -24,12 +28,16 @@ namespace TournamentMatcher
                 return null;
             }
 
-            var match = new SuggestedMatch(allPlayersRandomised[0], allPlayersRandomised[1], allPlayersRandomised[2], allPlayersRandomised[3]);
+            var p1 = allPlayersRandomised[0];
+            var p2 = allPlayersRandomised[1];
+            var p3 = allPlayersRandomised[2];
+            var p4 = allPlayersRandomised[3];
+            var match = new SuggestedMatch(p1, p2, p3, p4);
             remainingPlayers = allPlayersRandomised.Skip(4).ToList();
             return match;
         }
 
-        public float GetScore()
+        public float GetScoreForPlayerHandicapDifferences()
         {
             return GetPlayerHandicapStdDev();
         }

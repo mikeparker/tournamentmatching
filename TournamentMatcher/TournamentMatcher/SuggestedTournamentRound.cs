@@ -24,12 +24,13 @@ namespace TournamentMatcher
             round.AddPlayersSittingOut(playersSittingOut);
             var playingPlayers = players.Except(playersSittingOut).ToList();
             List<Player> remainingPlayers;
-            var match = SuggestedMatch.TakeFirstFourPlayers(playingPlayers, out remainingPlayers);
+            var match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
             while (match != null)
             {
                 round.AddMatch(match);
                 playingPlayers = remainingPlayers;
-                match = SuggestedMatch.TakeFirstFourPlayers(playingPlayers, out remainingPlayers);
+                match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
+
             }
 
             if (remainingPlayers.Count != 0)
@@ -66,9 +67,9 @@ namespace TournamentMatcher
             SuggestedMatches.Add(match);
         }
 
-        public float GetScore()
+        public float GetScoreForPlayerHandicapDifferences()
         {
-            return this.SuggestedMatches.Sum(m => m.GetScore());
+            return this.SuggestedMatches.Sum(m => m.GetScoreForPlayerHandicapDifferences()) / SuggestedMatches.Count;
         }
     }
 }

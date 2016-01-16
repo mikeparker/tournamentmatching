@@ -39,8 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Player.cs" />
     <Compile Include="ShuffleExtensions.cs" />
     <Compile Include="SuggestedMatch.cs" />
+    <Compile Include="SuggestedTournament.cs" />
     <Compile Include="SuggestedTournamentRound.cs" />
     <Compile Include="Team.cs" />
     <Compile Include="TournamentMatcher.cs" />
