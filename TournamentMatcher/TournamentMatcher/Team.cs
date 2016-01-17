@@ -22,8 +22,8 @@
 
         public float GetStdDevHandicap(float avgHandicap)
         {
-            var x = Player1.GetDevHandicap(avgHandicap);
-            var y = Player2.GetDevHandicap(avgHandicap);
+            var x = Player1.GetDifferenceInHandicap(avgHandicap);
+            var y = Player2.GetDifferenceInHandicap(avgHandicap);
             return (x + y)/2;
         }
 

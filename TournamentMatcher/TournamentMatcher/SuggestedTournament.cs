@@ -31,7 +31,8 @@ namespace TournamentMatcher
 
             for (int i = 0; i < numRounds; i++)
             {
-                var currentRound = SuggestedTournamentRound.CreateRandomRound(players);
+                var currentRound = SuggestedTournamentRound.CreateIntelligentRound(players);
+//                var currentRound = SuggestedTournamentRound.CreateRandomRound(players);
                 newTournament.AddRound(currentRound);
             }
 
@@ -63,8 +64,8 @@ namespace TournamentMatcher
             var avgScorePerRound = totalScoreForAllRounds/SuggestedTournamentRounds.Count;
 
             // for each player, calculate their tournament based on partners
-            var totalPartnerScoreForAllPlayers = this.players.Sum(p => p.GetPartnerScore());
-            var totalOpponentScoreForAllPlayers = this.players.Sum(p => p.GetOpponentScore());
+            var totalPartnerScoreForAllPlayers = this.players.Sum(p => p.GetScoreForPartnersSoFar());
+            var totalOpponentScoreForAllPlayers = this.players.Sum(p => p.GetScoreForOpponentsSoFar());
 
             var avgPartnerScore = totalPartnerScoreForAllPlayers/players.Count;
             var avgOpponentScore = totalOpponentScoreForAllPlayers/players.Count;

@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace TournamentMatcher
 {
+    [DebuggerDisplay("{Name}")]
     public class Player
     {
         public string Name { get; private set; }
@@ -20,9 +22,16 @@ namespace TournamentMatcher
             OpponentsSoFar = new Dictionary<Player, int>();
         }
 
-        public float GetDevHandicap(float avgHandicap)
+        public float GetScoreForHandicapDifference(float otherHandicap)
         {
-            return Math.Abs(Handicap - avgHandicap);
+            var scoreForHandicapDifference = GetDifferenceInHandicap(otherHandicap);
+
+            return scoreForHandicapDifference * scoreForHandicapDifference;
+        }
+
+        public float GetDifferenceInHandicap(float otherHandicap)
+        {
+            return Math.Abs(Handicap - otherHandicap);
         }
 
         public void AddOpponents(Player player1, Player player2)
@@ -61,14 +70,48 @@ namespace TournamentMatcher
             this.AddOpponent(opposingTeam.Player2);
         }
 
-        public float GetPartnerScore()
+        public float GetScoreForPartnersSoFar()
         {
             return this.PartnersSoFar.Sum(kvp => (kvp.Value - 1) * (kvp.Value - 1)); // no idea if this is good
         }
 
-        public float GetOpponentScore()
+        public float GetScoreForOpponentsSoFar()
         {
             return this.OpponentsSoFar.Sum(kvp => (kvp.Value - 1) * (kvp.Value - 1)); // no idea if this is good
+        }
+
+        public float GetScoreIfTheyPlayWithPartner(Player p2)
+        {
+            var x = GetTimesPartnered(p2);
+
+            return x * x;
+        }
+
+        public float GetScoreIfTheyPlayAgainst(Player opponent)
+        {
+            var x = GetTimesOpponent(opponent);
+
+            return x * x;
+        }
+
+        private float GetTimesPartnered(Player p2)
+        {
+            if (PartnersSoFar.ContainsKey(p2))
+            {
+                return PartnersSoFar[p2];
+            }
+
+            return 0;
+        }
+
+        private float GetTimesOpponent(Player p2)
+        {
+            if (OpponentsSoFar.ContainsKey(p2))
+            {
+                return OpponentsSoFar[p2];
+            }
+
+            return 0;
         }
     }
 }

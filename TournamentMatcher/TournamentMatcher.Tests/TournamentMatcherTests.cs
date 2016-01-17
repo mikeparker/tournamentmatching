@@ -15,8 +15,9 @@ namespace TournamentMatcher.Tests
         public void TestThat_SomethingWorks()
         {
 
+            float lowestScore = 999999;
             List<SuggestedTournament> possibleTournaments = new List<SuggestedTournament>();
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 var y = new List<Player>();
 //                y.Add(new Player("Mike", ", -13f));
@@ -99,9 +100,14 @@ y.Add(new Player("Sense	", -3));
 
                 var result = sut.CreateRandomisedTournament(6);
                 possibleTournaments.Add(result);
+                if (result.Score < lowestScore)
+                {
+                    lowestScore = result.Score;
+                }
+
                 if (i%100 == 99)
                 {
-                    Debug.WriteLine(result.Score);
+                    Debug.WriteLine(lowestScore);
                 }
             }
 

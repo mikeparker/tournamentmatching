@@ -41,6 +41,35 @@ namespace TournamentMatcher
             return round;
         }
 
+        public static SuggestedTournamentRound CreateIntelligentRound(List<Player> players)
+        {
+            players.Shuffle();
+            var round = new SuggestedTournamentRound();
+
+            var playersSittingOut = CalculatePlayersSittingOutNext(players);
+            round.AddPlayersSittingOut(playersSittingOut);
+            var playingPlayers = players.Except(playersSittingOut).ToList();
+            List<Player> remainingPlayers;
+            //            var match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
+            bool topFirst = true;
+            var match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
+            while (match != null)
+            {
+                topFirst = !topFirst;
+                round.AddMatch(match);
+                playingPlayers = remainingPlayers;
+                match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
+
+            }
+
+            if (remainingPlayers.Count != 0)
+            {
+                throw new Exception("Was not expecting any remainig players!");
+            }
+
+            return round;
+        }
+
         private static List<Player> CalculatePlayersSittingOutNext(List<Player> players)
         {
             var numSittingOutPerRound = players.Count % 4;
