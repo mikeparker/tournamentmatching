@@ -84,7 +84,7 @@ namespace TournamentMatcher
         {
             var x = GetTimesPartnered(p2);
 
-            return x * x;
+            return x * x * Weights.PartnerVariation;
         }
 
         public float GetScoreIfTheyPlayAgainst(Player opponent)
@@ -112,6 +112,11 @@ namespace TournamentMatcher
             }
 
             return 0;
+        }
+
+        public string GetNameWithHandicapString()
+        {
+            return this.Name + " (" + Handicap + ")";
         }
     }
 }

@@ -10,14 +10,23 @@
         {
             Player1 = p1;
             Player2 = p2;
-            p1.AddPartner(p2);
-            p2.AddPartner(p1);
             totalHandicap = p1.Handicap + p2.Handicap;
+        }
+
+        public void Finalise()
+        {
+            Player1.AddPartner(Player2);
+            Player2.AddPartner(Player1);
         }
 
         public float CompareHandicapWith(Team otherTeam)
         {
             return totalHandicap - otherTeam.totalHandicap;
+        }
+
+        public override string ToString()
+        {
+            return Player1.Name + " + " + Player2.Name;
         }
 
         public float GetStdDevHandicap(float avgHandicap)

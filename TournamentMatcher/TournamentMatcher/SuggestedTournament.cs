@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace TournamentMatcher
@@ -70,6 +72,49 @@ namespace TournamentMatcher
             var avgPartnerScore = totalPartnerScoreForAllPlayers/players.Count;
             var avgOpponentScore = totalOpponentScoreForAllPlayers/players.Count;
             return avgScorePerRound*weightSimilarSkill + avgPartnerScore*weightDifferentPartners + avgOpponentScore*weightDifferentOpponents;
+        }
+
+        public void PrintToDebug()
+        {
+            var rounds = this.SuggestedTournamentRounds.ToList();
+//            rounds.Shuffle();
+
+            for (int i = 0; i < rounds.Count; i++)
+            {
+                var suggestedTournamentRound = rounds[i];
+                Debug.WriteLine("");
+                Debug.WriteLine("ROUND " +(i+1));
+                Debug.WriteLine("-------");
+                foreach (var suggestedMatch in suggestedTournamentRound.SuggestedMatches)
+                {
+                    Debug.WriteLine(suggestedMatch.ToString());
+                }
+            }
+
+            foreach (var player in this.players.OrderBy(p => p.Handicap))
+            {
+                Debug.WriteLine("");
+                Debug.WriteLine("-- " + player.GetNameWithHandicapString() + "--");
+                Debug.WriteLine("Partners: " + string.Join(", ", player.PartnersSoFar.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))));
+                Debug.WriteLine("Opponents: " + string.Join(", ", player.OpponentsSoFar.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))));
+                var partnersMoreThanOnce = player.PartnersSoFar.Where(p => p.Value > 1);
+                var opponentsMoreThanOnce = player.OpponentsSoFar.Where(p => p.Value > 1);
+
+                Debug.WriteIf(partnersMoreThanOnce.Any(), "Duplicate partners: " + string.Join(", ", partnersMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+                Debug.WriteIf(opponentsMoreThanOnce.Any(), "Duplicate opponents: " + string.Join(", ", opponentsMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+            }
+        }
+
+        private string DisplayIfMoreThanOne(int number)
+        {
+            if (number == 1)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return " x" + number.ToString();
+            }
         }
     }
 }

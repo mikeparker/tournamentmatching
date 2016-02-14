@@ -27,7 +27,7 @@ namespace TournamentMatcher
             var match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
             while (match != null)
             {
-                round.AddMatch(match);
+                round.AddMatch(match, true);
                 playingPlayers = remainingPlayers;
                 match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
 
@@ -56,11 +56,12 @@ namespace TournamentMatcher
             while (match != null)
             {
                 topFirst = !topFirst;
-                round.AddMatch(match);
+                round.AddMatch(match, topFirst);
                 playingPlayers = remainingPlayers;
                 match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
-
             }
+
+
 
             if (remainingPlayers.Count != 0)
             {
@@ -91,9 +92,16 @@ namespace TournamentMatcher
             PlayersSittingOut.AddRange(players);
         }
 
-        private void AddMatch(SuggestedMatch match)
+        private void AddMatch(SuggestedMatch match, bool topFirst)
         {
-            SuggestedMatches.Add(match);
+            if (!topFirst)
+            {
+                SuggestedMatches.Insert(0 + (SuggestedMatches.Count / 2), match);
+            }
+            else
+            {
+                SuggestedMatches.Insert(0+(SuggestedMatches.Count/2), match);
+            }
         }
 
         public float GetScoreForPlayerHandicapDifferences()
