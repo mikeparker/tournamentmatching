@@ -100,8 +100,8 @@ namespace TournamentMatcher
                 var partnersMoreThanOnce = player.PartnersSoFar.Where(p => p.Value > 1);
                 var opponentsMoreThanOnce = player.OpponentsSoFar.Where(p => p.Value > 1);
 
-                Debug.WriteIf(partnersMoreThanOnce.Any(), "Duplicate partners: " + string.Join(", ", partnersMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
-                Debug.WriteIf(opponentsMoreThanOnce.Any(), "Duplicate opponents: " + string.Join(", ", opponentsMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+                Debug.WriteIf(partnersMoreThanOnce.Any(), "** Duplicate partners: " + string.Join(", ", partnersMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+                Debug.WriteIf(opponentsMoreThanOnce.Any(), "** Duplicate opponents: " + string.Join(", ", opponentsMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
             }
         }
 

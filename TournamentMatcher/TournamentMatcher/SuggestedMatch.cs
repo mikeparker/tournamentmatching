@@ -118,7 +118,7 @@ namespace TournamentMatcher
 
         private static Player FindBestPartner(List<Player> playersOrdered, Player player)
         {
-            var potentialPartners = new Dictionary<Player, float>();
+            var potentialPartnersWithSuitabilityScore = new Dictionary<Player, float>();
             var maxIndex = Math.Min(playersOrdered.Count - 1, MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO - 1);
             for (int i = 0; i < maxIndex; i++)
             {
@@ -128,19 +128,20 @@ namespace TournamentMatcher
                 }
 
                 var playerToConsider = playersOrdered[i];
-//                var score = GetPartnerSuitabilityScore(playerToConsider, player);
-                var score = GetPartnerSuitabilityScoreWithBands(playerToConsider, player);
+                var partnerSuitabilityScore = GetPartnerSuitabilityScoreWithBands(playerToConsider, player);
                 var scoreForMostBalancedGameYouCanMake = GetScoreForMostBalancedGame(player, playerToConsider, playersOrdered.ToList());
+
+                // If the partner is suitable but you can't make a sensible game with this partnership, discourage the partnership
                 if (scoreForMostBalancedGameYouCanMake > Weights.HandicapDifferenceBetweenTeamsToRetry)
                 {
-                    score += scoreForMostBalancedGameYouCanMake;
-                    Debug.WriteLine("Adding points to stupid partnership " + player.Name + " + " + playerToConsider.Name);
+                    partnerSuitabilityScore += scoreForMostBalancedGameYouCanMake;
+                    Debug.WriteLine("Adding points to stupid partnership " + player.Name + " + " + playerToConsider.Name + " because there are no sensible opponents.");
                 }
 
-                potentialPartners.Add(playerToConsider, score);
+                potentialPartnersWithSuitabilityScore.Add(playerToConsider, partnerSuitabilityScore);
             }
 
-            var orderedPartners = potentialPartners.OrderBy(kvp => kvp.Value);
+            var orderedPartners = potentialPartnersWithSuitabilityScore.OrderBy(kvp => kvp.Value);
             var bestPartner = orderedPartners.First();
             var bestPartnerScore = bestPartner.Value;
             var allMatchingBestPartners = orderedPartners.TakeWhile(kvp => kvp.Value == bestPartnerScore).ToList();
