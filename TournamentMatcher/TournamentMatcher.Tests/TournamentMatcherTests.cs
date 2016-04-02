@@ -42,7 +42,7 @@ namespace TournamentMatcher.Tests
 
         private void AddAllPlayers(List<Player> y)
         {
-            y.Add(new Player("Judith	Ashman	", -3));
+            y.Add(new Player("Judith Ashman	", -3));
             y.Add(new Player("Sean Blanchflower", -3));
             y.Add(new Player("Naomi Bowman", -2));
             y.Add(new Player("Jack Boyns", -8));
@@ -217,7 +217,7 @@ namespace TournamentMatcher.Tests
 
         private void AddAllLadies(List<Player> y)
         {
-            y.Add(new Player("Judith	Ashman	", -3));
+            y.Add(new Player("Judith Ashman	", -3));
             y.Add(new Player("Naomi Bowman", -2));
             y.Add(new Player("Zephanie Curgenven", -2));
             y.Add(new Player("Julia Frede", -3));
