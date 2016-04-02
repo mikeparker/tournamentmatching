@@ -102,9 +102,7 @@ namespace TournamentMatcher.GamePicking
 
         private void Finalise()
         {
-            this.Team1.Finalise();
-            this.Team2.Finalise();
-            this.Team1.AddOpponents(this.Team2);
+            this.Team1.FinaliseGame(Team2);
         }
 
         private static List<Player> FindBestOpponentsAndMakeMatch(List<Player> playersOrdered, Player initialPlayer, Player bestPartner, out SuggestedMatch match)

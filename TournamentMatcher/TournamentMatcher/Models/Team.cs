@@ -13,7 +13,14 @@
             this.totalHandicap = p1.Handicap + p2.Handicap;
         }
 
-        public void Finalise()
+        public void FinaliseGame(Team opposingTeam)
+        {
+            this.FinalisePartners();
+            opposingTeam.FinalisePartners();
+            this.AddOpponents(opposingTeam);
+        }
+
+        private void FinalisePartners()
         {
             this.Player1.AddPartner(this.Player2);
             this.Player2.AddPartner(this.Player1);
@@ -36,7 +43,7 @@
             return (x + y)/2;
         }
 
-        public void AddOpponents(Team opposingTeam)
+        private void AddOpponents(Team opposingTeam)
         {
             this.Player1.AddOpponents(opposingTeam);
             this.Player2.AddOpponents(opposingTeam);
