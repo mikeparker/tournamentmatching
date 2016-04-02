@@ -23,6 +23,7 @@ namespace TournamentMatcher.Client
         private void btnAddPlayers_Click(object sender, EventArgs e)
         {
             AddRemovePlayersForm x = new AddRemovePlayersForm();
+            x.SetPlayers(tournamentClientModel.AllPossiblePlayers);
             x.ShowDialog(this);
         }
 
@@ -42,6 +43,7 @@ namespace TournamentMatcher.Client
                 else
                 {
                     MessageBox.Show("Loaded " + count + " players.", "Loaded players", MessageBoxButtons.OK);
+                    btnAddPlayers.Enabled = true;
                 }
             }
         }

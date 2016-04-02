@@ -37,6 +37,7 @@
             // 
             // btnAddPlayers
             // 
+            this.btnAddPlayers.Enabled = false;
             this.btnAddPlayers.Location = new System.Drawing.Point(140, 376);
             this.btnAddPlayers.Name = "btnAddPlayers";
             this.btnAddPlayers.Size = new System.Drawing.Size(128, 26);
