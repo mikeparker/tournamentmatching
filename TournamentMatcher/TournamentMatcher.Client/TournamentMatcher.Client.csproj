@@ -44,11 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddPlayersForm.cs">
+    <Compile Include="AddRemovePlayersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddPlayersForm.Designer.cs">
-      <DependentUpon>AddPlayersForm.cs</DependentUpon>
+    <Compile Include="AddRemovePlayersForm.Designer.cs">
+      <DependentUpon>AddRemovePlayersForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -58,8 +58,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddPlayersForm.resx">
-      <DependentUpon>AddPlayersForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddRemovePlayersForm.resx">
+      <DependentUpon>AddRemovePlayersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

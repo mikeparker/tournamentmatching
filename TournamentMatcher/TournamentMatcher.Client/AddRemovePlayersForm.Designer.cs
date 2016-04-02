@@ -1,6 +1,6 @@
 ﻿namespace TournamentMatcher.Client
 {
-    partial class AddPlayersForm
+    partial class AddRemovePlayersForm
     {
         /// <summary>
         /// Required designer variable.
@@ -80,7 +80,7 @@
             this.button3.Text = "OK";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // AddPlayersForm
+            // AddRemovePlayersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -90,8 +90,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "AddPlayersForm";
-            this.Text = "AddPlayersForm";
+            this.Name = "AddRemovePlayersForm";
+            this.Text = "AddRemovePlayersForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);

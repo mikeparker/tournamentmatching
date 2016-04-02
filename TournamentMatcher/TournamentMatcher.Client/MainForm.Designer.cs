@@ -39,9 +39,9 @@
             // 
             this.btnAddPlayers.Location = new System.Drawing.Point(140, 376);
             this.btnAddPlayers.Name = "btnAddPlayers";
-            this.btnAddPlayers.Size = new System.Drawing.Size(93, 26);
+            this.btnAddPlayers.Size = new System.Drawing.Size(128, 26);
             this.btnAddPlayers.TabIndex = 0;
-            this.btnAddPlayers.Text = "Add Players";
+            this.btnAddPlayers.Text = "Add/Remove Players";
             this.btnAddPlayers.UseVisualStyleBackColor = true;
             this.btnAddPlayers.Click += new System.EventHandler(this.btnAddPlayers_Click);
             // 

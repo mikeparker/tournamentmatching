@@ -12,7 +12,7 @@ namespace TournamentMatcher.Client
 {
     public partial class MainForm : Form
     {
-        private TournamentClientModel tournamentClientModel;
+        private readonly TournamentClientModel tournamentClientModel;
 
         public MainForm()
         {
@@ -22,7 +22,7 @@ namespace TournamentMatcher.Client
 
         private void btnAddPlayers_Click(object sender, EventArgs e)
         {
-            AddPlayersForm x = new AddPlayersForm();
+            AddRemovePlayersForm x = new AddRemovePlayersForm();
             x.ShowDialog(this);
         }
 

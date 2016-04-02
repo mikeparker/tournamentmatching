@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace TournamentMatcher.Client
 {
-    public partial class AddPlayersForm : Form
+    public partial class AddRemovePlayersForm : Form
     {
-        public AddPlayersForm()
+        public AddRemovePlayersForm()
         {
             InitializeComponent();
         }
