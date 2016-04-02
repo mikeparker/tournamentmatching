@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TournamentMatcher.Models;
@@ -12,32 +11,24 @@ namespace TournamentMatcher
         private List<Player> allPossiblePlayers = new List<Player>();
         private List<CompletedTournamentRound> completedTournamentRounds = new List<CompletedTournamentRound>();
 
-        public TournamentClientModel()
+        public List<Player> AllPossiblePlayers
         {
-            allPossiblePlayers = LoadPlayersFromTextFile();
+            get { return this.allPossiblePlayers; }
         }
 
-        private List<Player> LoadPlayersFromTextFile()
+        public void LoadPlayersFromFile(string filepath)
         {
-            var fileString = FileTools.ReadFileString(@"D:\crossways-handicaps.txt");
-            var strings = fileString.Split('\n');
-            var results = strings.Select(ParsePlayer).ToList();
-
-            return results;
-        }
-
-        public Player ParsePlayer(string inputString)
-        {
-            var splitString = inputString.Split(',');
-            if (splitString.Length < 2)
+            List<Player> results;
+            try
             {
-                return null;
+                results = HandicapFileParser.ParseFile(filepath);
+            }
+            catch (Exception e)
+            {
+                results = new List<Player>();
             }
 
-            var name = splitString[0];
-            var handicap = float.Parse(splitString[1]);
-            var player = new Player(name, handicap);
-            return player;
+            this.allPossiblePlayers = results;
         }
     }
 
