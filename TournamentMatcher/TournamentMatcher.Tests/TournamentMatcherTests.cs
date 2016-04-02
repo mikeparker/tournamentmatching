@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Linq;
 using NUnit.Framework;
+using TournamentMatcher.GamePicking;
+using TournamentMatcher.Models;
 
 namespace TournamentMatcher.Tests
 {
@@ -20,7 +22,7 @@ namespace TournamentMatcher.Tests
 
                 AddSmallSelectionOfMen(y);
 
-                var sut = new TournamentMatcher(y);
+                var sut = new GamePicking.TournamentMatcher(y);
 
                 var result = sut.CreateRandomisedTournament(6);
                 possibleTournaments.Add(result);

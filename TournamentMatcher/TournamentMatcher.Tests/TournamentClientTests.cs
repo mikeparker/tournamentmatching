@@ -13,7 +13,9 @@ namespace TournamentMatcher.Tests
         [Test]
         public void TestSomething()
         {
-            
+            // the client should be initialised with a list of players with their handicaps
+            // Perhaps read from a file.
+            var x = new TournamentClientModel();
         }
     }
 }

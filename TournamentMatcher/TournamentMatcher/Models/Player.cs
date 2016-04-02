@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using TournamentMatcher.GamePicking;
 
-namespace TournamentMatcher
+namespace TournamentMatcher.Models
 {
     [DebuggerDisplay("{Name}")]
     public class Player
@@ -18,8 +19,8 @@ namespace TournamentMatcher
         {
             this.Name = name;
             this.Handicap = handicap;
-            PartnersSoFar = new Dictionary<Player, int>();
-            OpponentsSoFar = new Dictionary<Player, int>();
+            this.PartnersSoFar = new Dictionary<Player, int>();
+            this.OpponentsSoFar = new Dictionary<Player, int>();
         }
 
         public float GetScoreForHandicapDifference(float otherHandicap)
@@ -31,7 +32,7 @@ namespace TournamentMatcher
 
         public float GetDifferenceInHandicap(float otherHandicap)
         {
-            return Math.Abs(Handicap - otherHandicap);
+            return Math.Abs(this.Handicap - otherHandicap);
         }
 
         public void AddOpponents(Player player1, Player player2)
@@ -42,25 +43,25 @@ namespace TournamentMatcher
 
         private void AddOpponent(Player player)
         {
-            if (OpponentsSoFar.ContainsKey(player))
+            if (this.OpponentsSoFar.ContainsKey(player))
             {
-                OpponentsSoFar[player]++;
+                this.OpponentsSoFar[player]++;
             }
             else
             {
-                OpponentsSoFar.Add(player, 1);
+                this.OpponentsSoFar.Add(player, 1);
             }
         }
 
         public void AddPartner(Player player)
         {
-            if (PartnersSoFar.ContainsKey(player))
+            if (this.PartnersSoFar.ContainsKey(player))
             {
-                PartnersSoFar[player]++;
+                this.PartnersSoFar[player]++;
             }
             else
             {
-                PartnersSoFar.Add(player, 1);
+                this.PartnersSoFar.Add(player, 1);
             }
         }
 
@@ -96,9 +97,9 @@ namespace TournamentMatcher
 
         private float GetTimesPartnered(Player p2)
         {
-            if (PartnersSoFar.ContainsKey(p2))
+            if (this.PartnersSoFar.ContainsKey(p2))
             {
-                return PartnersSoFar[p2];
+                return this.PartnersSoFar[p2];
             }
 
             return 0;
@@ -106,9 +107,9 @@ namespace TournamentMatcher
 
         private float GetTimesOpponent(Player p2)
         {
-            if (OpponentsSoFar.ContainsKey(p2))
+            if (this.OpponentsSoFar.ContainsKey(p2))
             {
-                return OpponentsSoFar[p2];
+                return this.OpponentsSoFar[p2];
             }
 
             return 0;
@@ -116,7 +117,7 @@ namespace TournamentMatcher
 
         public string GetNameWithHandicapString()
         {
-            return this.Name + " (" + Handicap + ")";
+            return this.Name + " (" + this.Handicap + ")";
         }
     }
 }

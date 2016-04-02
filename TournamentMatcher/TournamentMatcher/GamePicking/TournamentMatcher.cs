@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+using TournamentMatcher.Models;
 
-namespace TournamentMatcher
+namespace TournamentMatcher.GamePicking
 {
     public class TournamentMatcher
     {
@@ -15,7 +14,7 @@ namespace TournamentMatcher
 
         public SuggestedTournament CreateRandomisedTournament(int numRounds)
         {
-            return SuggestedTournament.CreateRandomTournament(players, numRounds, 0.0f, 0.0f, 30.0f);
+            return SuggestedTournament.CreateRandomTournament(this.players, numRounds, 0.0f, 0.0f, 30.0f);
         }
     }
 }

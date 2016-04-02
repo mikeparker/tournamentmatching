@@ -1,4 +1,4 @@
-﻿namespace TournamentMatcher
+﻿namespace TournamentMatcher.Models
 {
     public class Team
     {
@@ -8,31 +8,31 @@
 
         public Team(Player p1, Player p2)
         {
-            Player1 = p1;
-            Player2 = p2;
-            totalHandicap = p1.Handicap + p2.Handicap;
+            this.Player1 = p1;
+            this.Player2 = p2;
+            this.totalHandicap = p1.Handicap + p2.Handicap;
         }
 
         public void Finalise()
         {
-            Player1.AddPartner(Player2);
-            Player2.AddPartner(Player1);
+            this.Player1.AddPartner(this.Player2);
+            this.Player2.AddPartner(this.Player1);
         }
 
         public float CompareHandicapWith(Team otherTeam)
         {
-            return totalHandicap - otherTeam.totalHandicap;
+            return this.totalHandicap - otherTeam.totalHandicap;
         }
 
         public override string ToString()
         {
-            return Player1.Name + " + " + Player2.Name;
+            return this.Player1.Name + " + " + this.Player2.Name;
         }
 
         public float GetStdDevHandicap(float avgHandicap)
         {
-            var x = Player1.GetDifferenceInHandicap(avgHandicap);
-            var y = Player2.GetDifferenceInHandicap(avgHandicap);
+            var x = this.Player1.GetDifferenceInHandicap(avgHandicap);
+            var y = this.Player2.GetDifferenceInHandicap(avgHandicap);
             return (x + y)/2;
         }
 

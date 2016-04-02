@@ -1,4 +1,4 @@
-namespace TournamentMatcher
+namespace TournamentMatcher.GamePicking
 {
     internal class Weights
     {

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TournamentMatcher.lib;
+using TournamentMatcher.Models;
 
-namespace TournamentMatcher
+namespace TournamentMatcher.GamePicking
 {
     public class SuggestedTournamentRound
     {
@@ -11,8 +13,8 @@ namespace TournamentMatcher
 
         public SuggestedTournamentRound()
         {
-            PlayersSittingOut = new List<Player>();
-            SuggestedMatches = new List<SuggestedMatch>();
+            this.PlayersSittingOut = new List<Player>();
+            this.SuggestedMatches = new List<SuggestedMatch>();
         }
 
         public static SuggestedTournamentRound CreateRandomRound(List<Player> players)
@@ -89,24 +91,24 @@ namespace TournamentMatcher
 
         private void AddPlayersSittingOut(List<Player> players)
         {
-            PlayersSittingOut.AddRange(players);
+            this.PlayersSittingOut.AddRange(players);
         }
 
         private void AddMatch(SuggestedMatch match, bool topFirst)
         {
             if (!topFirst)
             {
-                SuggestedMatches.Insert(0 + (SuggestedMatches.Count / 2), match);
+                this.SuggestedMatches.Insert(0 + (this.SuggestedMatches.Count / 2), match);
             }
             else
             {
-                SuggestedMatches.Insert(0+(SuggestedMatches.Count/2), match);
+                this.SuggestedMatches.Insert(0+(this.SuggestedMatches.Count/2), match);
             }
         }
 
         public float GetScoreForPlayerHandicapDifferences()
         {
-            return this.SuggestedMatches.Sum(m => m.GetScoreForPlayerHandicapDifferences()) / SuggestedMatches.Count;
+            return this.SuggestedMatches.Sum(m => m.GetScoreForPlayerHandicapDifferences()) / this.SuggestedMatches.Count;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace TournamentMatcher
+namespace TournamentMatcher.lib
 {
     public static class ShuffleExtensions
     {

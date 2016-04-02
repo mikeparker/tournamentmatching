@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using TournamentMatcher.Models;
 
-namespace TournamentMatcher
+namespace TournamentMatcher.GamePicking
 {
     public class SuggestedTournament
     {
@@ -52,7 +52,7 @@ namespace TournamentMatcher
 
         private void AddRound(SuggestedTournamentRound currentRound)
         {
-            SuggestedTournamentRounds.Add(currentRound);
+            this.SuggestedTournamentRounds.Add(currentRound);
         }
 
         private float GetScore()
@@ -62,16 +62,16 @@ namespace TournamentMatcher
             // TODO: Players dont play with the same partner DONE
             // TODO: Players dont play in the same game as others DONE
             // TODO: Differences in skill level between partners
-            var totalScoreForAllRounds = SuggestedTournamentRounds.Sum(r => r.GetScoreForPlayerHandicapDifferences());
-            var avgScorePerRound = totalScoreForAllRounds/SuggestedTournamentRounds.Count;
+            var totalScoreForAllRounds = this.SuggestedTournamentRounds.Sum(r => r.GetScoreForPlayerHandicapDifferences());
+            var avgScorePerRound = totalScoreForAllRounds/this.SuggestedTournamentRounds.Count;
 
             // for each player, calculate their tournament based on partners
             var totalPartnerScoreForAllPlayers = this.players.Sum(p => p.GetScoreForPartnersSoFar());
             var totalOpponentScoreForAllPlayers = this.players.Sum(p => p.GetScoreForOpponentsSoFar());
 
-            var avgPartnerScore = totalPartnerScoreForAllPlayers/players.Count;
-            var avgOpponentScore = totalOpponentScoreForAllPlayers/players.Count;
-            return avgScorePerRound*weightSimilarSkill + avgPartnerScore*weightDifferentPartners + avgOpponentScore*weightDifferentOpponents;
+            var avgPartnerScore = totalPartnerScoreForAllPlayers/this.players.Count;
+            var avgOpponentScore = totalOpponentScoreForAllPlayers/this.players.Count;
+            return avgScorePerRound*this.weightSimilarSkill + avgPartnerScore*this.weightDifferentPartners + avgOpponentScore*this.weightDifferentOpponents;
         }
 
         public void PrintToDebug()
