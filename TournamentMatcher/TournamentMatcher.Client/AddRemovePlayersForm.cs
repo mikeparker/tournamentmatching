@@ -14,8 +14,8 @@ namespace TournamentMatcher.Client
     public partial class AddRemovePlayersForm : Form
     {
         private List<Player> allPossiblePlayers;
-        private BindingList<Player> currentPlayersNotPlaying;
-        private BindingList<Player> currentTournamentPlayers;
+        private SortableBindingList<Player> currentPlayersNotPlaying;
+        private SortableBindingList<Player> currentTournamentPlayers;
 
         public AddRemovePlayersForm()
         {
@@ -24,9 +24,9 @@ namespace TournamentMatcher.Client
 
         public void SetPlayers(List<Player> allPossiblePlayers)
         {
-            this.currentPlayersNotPlaying = new BindingList<Player>(allPossiblePlayers);
+            this.currentPlayersNotPlaying = new SortableBindingList<Player>(allPossiblePlayers);
             this.allPossiblePlayers = allPossiblePlayers;
-            currentTournamentPlayers = new BindingList<Player>();
+            currentTournamentPlayers = new SortableBindingList<Player>();
             SetDataGrid(this.dataGridView1, this.currentPlayersNotPlaying);
             SetDataGrid(this.dataGridView2, this.currentTournamentPlayers);
         }

@@ -41,6 +41,8 @@
   <ItemGroup>
     <Compile Include="HandicapFileParser.cs" />
     <Compile Include="lib\FileTools.cs" />
+    <Compile Include="lib\PropertyComparer.cs" />
+    <Compile Include="lib\SortableBindingList.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="lib\ShuffleExtensions.cs" />
     <Compile Include="GamePicking\SuggestedMatch.cs" />
