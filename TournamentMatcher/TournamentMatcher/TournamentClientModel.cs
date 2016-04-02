@@ -10,7 +10,35 @@ namespace TournamentMatcher
     public class TournamentClientModel
     {
         private List<Player> allPossiblePlayers = new List<Player>();
-        private List<CompletedTournamentRound> completedTournamentRounds = new List<CompletedTournamentRound>(); 
+        private List<CompletedTournamentRound> completedTournamentRounds = new List<CompletedTournamentRound>();
+
+        public TournamentClientModel()
+        {
+            allPossiblePlayers = LoadPlayersFromTextFile();
+        }
+
+        private List<Player> LoadPlayersFromTextFile()
+        {
+            var fileString = FileTools.ReadFileString(@"D:\crossways-handicaps.txt");
+            var strings = fileString.Split('\n');
+            var results = strings.Select(ParsePlayer).ToList();
+
+            return results;
+        }
+
+        public Player ParsePlayer(string inputString)
+        {
+            var splitString = inputString.Split(',');
+            if (splitString.Length < 2)
+            {
+                return null;
+            }
+
+            var name = splitString[0];
+            var handicap = float.Parse(splitString[1]);
+            var player = new Player(name, handicap);
+            return player;
+        }
     }
 
     public class CompletedTournamentRound
