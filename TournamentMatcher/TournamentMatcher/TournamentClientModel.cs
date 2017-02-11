@@ -23,7 +23,7 @@ namespace TournamentMatcher
             {
                 results = HandicapFileParser.ParseFile(filepath);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 results = new List<Player>();
             }

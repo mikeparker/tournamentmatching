@@ -13,7 +13,6 @@ namespace TournamentMatcher.Tests
         [Test]
         public void TestThat_SomethingWorks()
         {
-
             float lowestScore = 999999;
             List<SuggestedTournament> possibleTournaments = new List<SuggestedTournament>();
             for (int i = 0; i < 1; i++)
