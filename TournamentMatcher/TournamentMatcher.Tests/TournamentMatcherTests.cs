@@ -265,7 +265,10 @@ namespace TournamentMatcher.Tests
             players.Add(new Player("Seven", 1));
 
             var x = SuggestedTournament.CreateRandomTournament(players, 7, 1.0f, 1.0f, 3.0f);
-
+            foreach (var player in players)
+            {
+                Assert.That(player.NumberOfGamesSatOutSoFar, Is.EqualTo(3));
+            }
         }
     }
 }
