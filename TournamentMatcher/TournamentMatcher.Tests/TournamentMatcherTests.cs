@@ -249,7 +249,7 @@ namespace TournamentMatcher.Tests
             List<Player> remainingPlayers;
             var sut = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(players, out remainingPlayers);
 
-            Assert.That(sut.GetScoreForPlayerHandicapDifferences(), Is.EqualTo(0));
+            Assert.That(sut.GetScoreForPlayerHandicapDifferences(), Is.EqualTo(1));
         }
 
         [Test]
