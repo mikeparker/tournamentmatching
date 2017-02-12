@@ -2,8 +2,8 @@ namespace TournamentMatcher.GamePicking
 {
     internal class Weights
     {
-        public static float PartnerVariation = 20.0f;
-        public static float OpponentVariation = 10.0f;
+        public static float PartnerVariation = 100.0f;
+        public static float OpponentVariation = 30.0f;
         public static float SkillDifferenceForPartner = 1.0f;
         public static float SkillDifferenceForOpponent = 1.0f;
 
