@@ -11,7 +11,7 @@ namespace TournamentMatcher.Tests
     public class TournamentMatcherTests
     {
         [Test]
-        public void TestThat_SomethingWorks()
+        public void TestEntireThing()
         {
             float lowestScore = 999999;
             List<SuggestedTournament> possibleTournaments = new List<SuggestedTournament>();

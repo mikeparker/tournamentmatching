@@ -63,8 +63,6 @@ namespace TournamentMatcher.GamePicking
                 match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
             }
 
-
-
             if (remainingPlayers.Count != 0)
             {
                 throw new Exception("Was not expecting any remainig players!");

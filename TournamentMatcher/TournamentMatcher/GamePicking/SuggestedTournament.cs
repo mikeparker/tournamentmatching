@@ -36,6 +36,7 @@ namespace TournamentMatcher.GamePicking
                 var currentRound = SuggestedTournamentRound.CreateIntelligentRound(players);
 //                var currentRound = SuggestedTournamentRound.CreateRandomRound(players);
                 newTournament.AddRound(currentRound);
+                Debug.WriteLine("*** Creating Round " + i + " *******");
             }
 
             newTournament.StoreScore();

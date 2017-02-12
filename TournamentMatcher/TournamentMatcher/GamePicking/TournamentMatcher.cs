@@ -14,7 +14,7 @@ namespace TournamentMatcher.GamePicking
 
         public SuggestedTournament CreateRandomisedTournament(int numRounds)
         {
-            return SuggestedTournament.CreateRandomTournament(this.players, numRounds, 0.0f, 0.0f, 30.0f);
+            return SuggestedTournament.CreateRandomTournament(this.players, numRounds, Weights.PartnerVariation, Weights.OpponentVariation, Weights.MinHandicapDifferenceToBand);
         }
     }
 }

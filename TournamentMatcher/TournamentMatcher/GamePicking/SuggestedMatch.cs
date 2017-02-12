@@ -12,7 +12,6 @@ namespace TournamentMatcher.GamePicking
     {
         public Team Team1;
         public Team Team2;
-        private const int MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO = 15;
         public float HandicapDifference { get; private set; }
 
         private SuggestedMatch(Player p1, Player p2, Player p3, Player p4)
@@ -52,9 +51,7 @@ namespace TournamentMatcher.GamePicking
                 return null;
             }
 
-            List<Player> playersOrdered = topFirst 
-                                            ? allPlayersRandomised.OrderBy(p => p.Handicap).ToList() 
-                                            : allPlayersRandomised.OrderByDescending(p => p.Handicap).ToList();
+            List<Player> playersOrdered = OrderPlayersByHandicap(allPlayersRandomised, topFirst);
 
             var initialPlayer = playersOrdered[0];
             playersOrdered.RemoveAt(0);
@@ -62,8 +59,8 @@ namespace TournamentMatcher.GamePicking
             var bestPartner = FindBestPartner(playersOrdered, initialPlayer);
             playersOrdered.Remove(bestPartner);
 
-            List<Player> bestOpponents;
-            var match = MakeMatch(playersOrdered, initialPlayer, bestPartner, out bestOpponents);
+            SuggestedMatch match;
+            List<Player> bestOpponents = FindBestOpponentsAndMakeMatch(playersOrdered, initialPlayer, bestPartner, out match);
 
             match.Finalise();
 
@@ -73,31 +70,11 @@ namespace TournamentMatcher.GamePicking
             return match;
         }
 
-        private static SuggestedMatch MakeMatch(List<Player> playersOrdered, Player initialPlayer, Player bestPartner, out List<Player> bestOpponents)
+        private static List<Player> OrderPlayersByHandicap(List<Player> allPlayersRandomised, bool topFirst)
         {
-//            for (int j = 0; j < 5; j++)
-//            {
-                for (int i = 0; i < 10; i++)
-                {
-                    SuggestedMatch match;
-                    bestOpponents = FindBestOpponentsAndMakeMatch(playersOrdered, initialPlayer, bestPartner, out match);
-                    if (match.HandicapDifference < Weights.HandicapDifferenceBetweenTeamsToRetry)
-                    {
-                        return match;
-                    }
-
-                    Debug.WriteLine("Skipping game " + match.ToString());
-
-                    if (i == 9)
-                    {
-                        Debug.WriteLine("Giving up attempting to find sensible opponents for partnership: " + match.Team1);
-                        return match;
-//                        break;
-                    }
-                }
-//            }
-            bestOpponents = new List<Player>();
-            return null;
+            return topFirst 
+                ? allPlayersRandomised.OrderBy(p => p.Handicap).ToList() 
+                : allPlayersRandomised.OrderByDescending(p => p.Handicap).ToList();
         }
 
         private void Finalise()
@@ -119,7 +96,7 @@ namespace TournamentMatcher.GamePicking
         private static Player FindBestPartner(List<Player> playersOrdered, Player player)
         {
             var potentialPartnersWithSuitabilityScore = new Dictionary<Player, float>();
-            var maxIndex = Math.Min(playersOrdered.Count - 1, MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO - 1);
+            var maxIndex = Math.Min(playersOrdered.Count - 1, Weights.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO - 1);
             for (int i = 0; i < maxIndex; i++)
             {
                 if (playersOrdered.Count < i)
@@ -134,7 +111,7 @@ namespace TournamentMatcher.GamePicking
                 // If the partner is suitable but you can't make a sensible game with this partnership, discourage the partnership
                 if (scoreForMostBalancedGameYouCanMake > Weights.HandicapDifferenceBetweenTeamsToRetry)
                 {
-                    partnerSuitabilityScore += scoreForMostBalancedGameYouCanMake;
+                    partnerSuitabilityScore += scoreForMostBalancedGameYouCanMake * scoreForMostBalancedGameYouCanMake;
                     Debug.WriteLine("Adding points to stupid partnership " + player.Name + " + " + playerToConsider.Name + " because there are no sensible opponents.");
                 }
 
@@ -150,7 +127,7 @@ namespace TournamentMatcher.GamePicking
             return allMatchingBestPartners.First().Key;
         }
 
-        private static int GetScoreForMostBalancedGame(Player player, Player playerToConsider, List<Player> playersCopy)
+        public static int GetScoreForMostBalancedGame(Player player, Player playerToConsider, List<Player> playersCopy)
         {
             var team1handicap = player.Handicap + playerToConsider.Handicap;
             playersCopy.Remove(playerToConsider);
@@ -165,7 +142,7 @@ namespace TournamentMatcher.GamePicking
         private static List<Player> FindBestOpponents(List<Player> playersOrdered, Player player1, Player player2)
         {
             var potentialOpponents = new Dictionary<Player, float>();
-            var numTocheck = Math.Min(playersOrdered.Count, MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO);
+            var numTocheck = Math.Min(playersOrdered.Count, Weights.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO);
             for (int i = 0; i < numTocheck; i++)
             {
                 if (playersOrdered.Count < i)
