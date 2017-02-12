@@ -86,6 +86,10 @@ namespace TournamentMatcher.GamePicking
                 Debug.WriteLine("");
                 Debug.WriteLine("ROUND " +(i+1));
                 Debug.WriteLine("-------");
+                if (suggestedTournamentRound.PlayersSittingOut.Any())
+                {
+                    Debug.WriteLine("Sitting out: " + string.Join(", ", suggestedTournamentRound.PlayersSittingOut));
+                }
                 foreach (var suggestedMatch in suggestedTournamentRound.SuggestedMatches)
                 {
                     Debug.WriteLine(suggestedMatch.ToString());
