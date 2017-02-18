@@ -9,37 +9,20 @@ namespace TournamentMatcher.GamePicking
     [DebuggerDisplay("{ToString()}")]
     public class SuggestedMatch
     {
-        public Team Team1;
-        public Team Team2;
-        public float HandicapDifference { get; private set; }
+        public Team Team1 { get; private set; }
+        public Team Team2 { get; private set; }
+        private readonly float absHandicapDifference;
 
         private SuggestedMatch(Player p1, Player p2, Player p3, Player p4)
         {
             this.Team1 = new Team(p1, p2);
             this.Team2 = new Team(p3, p4);
-            this.HandicapDifference = Math.Abs(this.Team1.CompareHandicapWith(this.Team2));
-        }
-
-        public static SuggestedMatch CreateMatchFromFirstFirstFourPlayers(List<Player> allPlayersRandomised, out List<Player> remainingPlayers)
-        {
-            if (allPlayersRandomised.Count < 4)
-            {
-                remainingPlayers = allPlayersRandomised;
-                return null;
-            }
-
-            var p1 = allPlayersRandomised[0];
-            var p2 = allPlayersRandomised[1];
-            var p3 = allPlayersRandomised[2];
-            var p4 = allPlayersRandomised[3];
-            var match = new SuggestedMatch(p1, p2, p3, p4);
-            remainingPlayers = allPlayersRandomised.Skip(4).ToList();
-            return match;
+            this.absHandicapDifference = Math.Abs(this.Team1.CompareHandicapWith(this.Team2));
         }
 
         public override string ToString()
         {
-            return "Match:" + this.Team1.Player1.Name + " + " + this.Team1.Player2.Name + " vs " + this.Team2.Player1.Name + " + " + this.Team2.Player2.Name + " | Hcap: " + this.HandicapDifference;
+            return "Match:" + this.Team1.Player1.Name + " + " + this.Team1.Player2.Name + " vs " + this.Team2.Player1.Name + " + " + this.Team2.Player2.Name + " | Hcap: " + this.absHandicapDifference;
         }
 
         public static SuggestedMatch CreateMatchFromIntelligentlySelectedPlayers(List<Player> allPlayersRandomised, out List<Player> remainingPlayers, bool topFirst)

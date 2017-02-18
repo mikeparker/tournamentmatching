@@ -33,7 +33,7 @@
 
         public override string ToString()
         {
-            return this.Player1.Name + " + " + this.Player2.Name;
+            return "(" + totalHandicap + ") " + this.Player1.Name + " + " + this.Player2.Name;
         }
 
         public float GetStdDevHandicap(float avgHandicap)

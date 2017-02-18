@@ -239,20 +239,6 @@ namespace TournamentMatcher.Tests
         }
 
         [Test]
-        public void TestThat_AvgHandicapWorks()
-        {
-            var players = new List<Player>();
-            players.Add(new Player("One", 0));
-            players.Add(new Player("Two", 0));
-            players.Add(new Player("Three", 2));
-            players.Add(new Player("Four", 2));
-            List<Player> remainingPlayers;
-            var sut = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(players, out remainingPlayers);
-
-            Assert.That(sut.GetScoreForPlayerHandicapDifferences(), Is.EqualTo(1));
-        }
-
-        [Test]
         public void TestThat_SittingOutIsFair()
         {
             var players = new List<Player>();

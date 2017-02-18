@@ -17,32 +17,6 @@ namespace TournamentMatcher.GamePicking
             this.SuggestedMatches = new List<SuggestedMatch>();
         }
 
-        public static SuggestedTournamentRound CreateRandomRound(List<Player> players)
-        {
-            players.Shuffle();
-            var round = new SuggestedTournamentRound();
-
-            var playersSittingOut = CalculatePlayersSittingOutNext(players);
-            round.AddPlayersSittingOut(playersSittingOut);
-            var playingPlayers = players.Except(playersSittingOut).ToList();
-            List<Player> remainingPlayers;
-            var match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
-            while (match != null)
-            {
-                round.AddMatch(match, true);
-                playingPlayers = remainingPlayers;
-                match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
-
-            }
-
-            if (remainingPlayers.Count != 0)
-            {
-                throw new Exception("Was not expecting any remaining players!");
-            }
-
-            return round;
-        }
-
         public static SuggestedTournamentRound CreateIntelligentRound(List<Player> players)
         {
             players.Shuffle();
@@ -52,7 +26,6 @@ namespace TournamentMatcher.GamePicking
             round.AddPlayersSittingOut(playersSittingOut);
             var playingPlayers = players.Except(playersSittingOut).ToList();
             List<Player> remainingPlayers;
-            //            var match = SuggestedMatch.CreateMatchFromFirstFirstFourPlayers(playingPlayers, out remainingPlayers);
             bool topFirst = true;
             var match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
             while (match != null)
