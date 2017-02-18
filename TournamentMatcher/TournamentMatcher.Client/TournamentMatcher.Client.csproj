@@ -50,6 +50,7 @@
     <Compile Include="AddRemovePlayersForm.Designer.cs">
       <DependentUpon>AddRemovePlayersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Extensions.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

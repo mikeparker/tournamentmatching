@@ -28,46 +28,46 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dgvPlayersNotPlaying = new System.Windows.Forms.DataGridView();
+            this.dgvPlayersPlaying = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayersNotPlaying)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayersPlaying)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvPlayersNotPlaying
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 25);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(306, 349);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvPlayersNotPlaying.AllowUserToAddRows = false;
+            this.dgvPlayersNotPlaying.AllowUserToDeleteRows = false;
+            this.dgvPlayersNotPlaying.AllowUserToOrderColumns = true;
+            this.dgvPlayersNotPlaying.AllowUserToResizeRows = false;
+            this.dgvPlayersNotPlaying.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlayersNotPlaying.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvPlayersNotPlaying.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.dgvPlayersNotPlaying.Location = new System.Drawing.Point(12, 25);
+            this.dgvPlayersNotPlaying.Name = "dgvPlayersNotPlaying";
+            this.dgvPlayersNotPlaying.ReadOnly = true;
+            this.dgvPlayersNotPlaying.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPlayersNotPlaying.Size = new System.Drawing.Size(306, 349);
+            this.dgvPlayersNotPlaying.TabIndex = 0;
             // 
-            // dataGridView2
+            // dgvPlayersPlaying
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.AllowUserToResizeRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridView2.Location = new System.Drawing.Point(405, 25);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(326, 349);
-            this.dataGridView2.TabIndex = 1;
+            this.dgvPlayersPlaying.AllowUserToAddRows = false;
+            this.dgvPlayersPlaying.AllowUserToDeleteRows = false;
+            this.dgvPlayersPlaying.AllowUserToResizeRows = false;
+            this.dgvPlayersPlaying.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPlayersPlaying.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dgvPlayersPlaying.Location = new System.Drawing.Point(405, 25);
+            this.dgvPlayersPlaying.Name = "dgvPlayersPlaying";
+            this.dgvPlayersPlaying.ReadOnly = true;
+            this.dgvPlayersPlaying.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPlayersPlaying.Size = new System.Drawing.Size(326, 349);
+            this.dgvPlayersPlaying.TabIndex = 1;
             // 
             // button1
             // 
@@ -127,12 +127,12 @@
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvPlayersPlaying);
+            this.Controls.Add(this.dgvPlayersNotPlaying);
             this.Name = "AddRemovePlayersForm";
             this.Text = "Add players to tournament";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayersNotPlaying)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPlayersPlaying)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,8 +140,8 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dgvPlayersNotPlaying;
+        private System.Windows.Forms.DataGridView dgvPlayersPlaying;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnOk;

@@ -39,6 +39,8 @@
             this.dgvGamesPlayed = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.lblSittingOut = new System.Windows.Forms.Label();
+            this.btnEnterScore = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNextRound)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGamesPlayed)).BeginInit();
@@ -94,9 +96,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Players";
+            this.label1.Text = "Tournament Players";
             // 
             // label2
             // 
@@ -140,15 +142,36 @@
             this.lblSittingOut.AutoSize = true;
             this.lblSittingOut.Location = new System.Drawing.Point(510, 390);
             this.lblSittingOut.Name = "lblSittingOut";
-            this.lblSittingOut.Size = new System.Drawing.Size(64, 13);
+            this.lblSittingOut.Size = new System.Drawing.Size(0, 13);
             this.lblSittingOut.TabIndex = 6;
-            this.lblSittingOut.Text = "Next Round";
+            // 
+            // btnEnterScore
+            // 
+            this.btnEnterScore.Location = new System.Drawing.Point(228, 390);
+            this.btnEnterScore.Name = "btnEnterScore";
+            this.btnEnterScore.Size = new System.Drawing.Size(128, 26);
+            this.btnEnterScore.TabIndex = 7;
+            this.btnEnterScore.Text = "Enter Score";
+            this.btnEnterScore.UseVisualStyleBackColor = true;
+            this.btnEnterScore.Click += new System.EventHandler(this.btnEnterScore_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(730, 450);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(128, 39);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Change Tournament Settings";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(870, 501);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnEnterScore);
             this.Controls.Add(this.lblSittingOut);
             this.Controls.Add(this.dgvGamesPlayed);
             this.Controls.Add(this.dgvNextRound);
@@ -182,6 +205,8 @@
         private System.Windows.Forms.DataGridView dgvGamesPlayed;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblSittingOut;
+        private System.Windows.Forms.Button btnEnterScore;
+        private System.Windows.Forms.Button button3;
     }
 }
 

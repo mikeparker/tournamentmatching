@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using TournamentMatcher.GamePicking;
 
 namespace TournamentMatcher.Client
 {
@@ -75,6 +73,18 @@ namespace TournamentMatcher.Client
             this.dgvNextRound.DataSource = tournamentClientModel.CurrentRoundBindingList;
             this.dgvGamesPlayed.DataSource = tournamentClientModel.PreviousRoundsBindingList;
             this.lblSittingOut.Text = "Sitting out:" + string.Join(", ", tournamentClientModel.CurrentRound.PlayersSittingOut.Select(p => p.Name));
+            dgvGamesPlayed.SetNotColumnSortable();
+            dgvNextRound.SetNotColumnSortable();
+            dgvGamesPlayed.SetColumnEditable(2);
+        }
+
+        private void btnEnterScore_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

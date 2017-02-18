@@ -22,7 +22,7 @@ namespace TournamentMatcher.GamePicking
 
                 var playerToConsider = playersOrdered[i];
                 var partnerSuitabilityScore = playerToConsider.GetPartnerSuitabilityScoreWithBands(player);
-                var scoreForMostBalancedGameYouCanMake = MatchPicker.GetScoreForMostBalancedGame(player, playerToConsider, playersOrdered);
+                var scoreForMostBalancedGameYouCanMake = GetScoreForMostBalancedGame(player, playerToConsider, playersOrdered);
 
                 // If the partner is suitable but you can't make a sensible game with this partnership, discourage the partnership
                 if (scoreForMostBalancedGameYouCanMake > Weights.HandicapDifferenceBetweenTeamsToRetry)

@@ -11,6 +11,8 @@ namespace TournamentMatcher.GamePicking
     {
         public Team Team1 { get; private set; }
         public Team Team2 { get; private set; }
+        public string Score { get; set; }
+
         private readonly float absHandicapDifference;
 
         private Match(Player p1, Player p2, Player p3, Player p4)

@@ -35,7 +35,7 @@ namespace TournamentMatcher.Client
         // Add players
         private void button1_Click(object sender, EventArgs e)
         {
-            MovePlayers(this.dataGridView1, this.currentPlayersNotPlaying, this.currentTournamentPlayers);
+            MovePlayers(this.dgvPlayersNotPlaying, this.currentPlayersNotPlaying, this.currentTournamentPlayers);
         }
 
         private void MovePlayers(DataGridView dataGridView, BindingList<Player> playersToMoveFrom, BindingList<Player> playersToMoveTo)
@@ -71,16 +71,24 @@ namespace TournamentMatcher.Client
 
         private void button2_Click(object sender, EventArgs e)
         {
-            MovePlayers(this.dataGridView2, this.currentTournamentPlayers, this.currentPlayersNotPlaying);
+            MovePlayers(this.dgvPlayersPlaying, this.currentTournamentPlayers, this.currentPlayersNotPlaying);
         }
 
         public void SetModel(TournamentClientModel tournamentClientModel)
         {
             this.model = tournamentClientModel;
-            this.currentPlayersNotPlaying = new SortableBindingList<Player>(tournamentClientModel.AllPossiblePlayers);
-            currentTournamentPlayers = new SortableBindingList<Player>();
-            SetDataGrid(this.dataGridView1, this.currentPlayersNotPlaying);
-            SetDataGrid(this.dataGridView2, this.currentTournamentPlayers);
+            this.currentPlayersNotPlaying = new SortableBindingList<Player>(tournamentClientModel.AllPossiblePlayers.Where(p =>
+            {
+                var playersInTournament = tournamentClientModel.PlayersInTournament;
+                if (playersInTournament == null)
+                {
+                    return true;
+                }
+                return !playersInTournament.Contains(p);
+            }));
+            this.currentTournamentPlayers = new SortableBindingList<Player>(tournamentClientModel.PlayersBindingList);
+            SetDataGrid(this.dgvPlayersNotPlaying, currentPlayersNotPlaying);
+            SetDataGrid(this.dgvPlayersPlaying, currentTournamentPlayers);
         }
     }
 }
