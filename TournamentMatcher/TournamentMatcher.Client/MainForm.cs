@@ -26,12 +26,21 @@ namespace TournamentMatcher.Client
 
         private void OpenAddPlayersForm()
         {
+            if (tournamentClientModel.AllPossiblePlayers == null)
+            {
+                return;
+            }
             AddRemovePlayersForm x = new AddRemovePlayersForm();
             x.SetModel(this.tournamentClientModel);
             x.ShowDialog(this);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
+        {
+            OpenHandicapsFile();
+        }
+
+        private void OpenHandicapsFile()
         {
             DialogResult result = openFileDialog1.ShowDialog();
             if (result != DialogResult.OK)
@@ -78,13 +87,25 @@ namespace TournamentMatcher.Client
             dgvGamesPlayed.SetColumnEditable(2);
         }
 
-        private void btnEnterScore_Click(object sender, EventArgs e)
+        private void openHandicapsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenHandicapsFile();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void addRemovePlayersToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenAddPlayersForm();
+        }
 
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void tournamentSettingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            var x = new Settings();
+            x.ShowDialog(this);
         }
     }
 }

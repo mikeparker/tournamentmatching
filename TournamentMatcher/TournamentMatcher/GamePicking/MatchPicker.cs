@@ -12,7 +12,7 @@ namespace TournamentMatcher.GamePicking
         public static Player FindBestPartner(List<Player> playersOrdered, Player player)
         {
             var potentialPartnersWithSuitabilityScore = new Dictionary<Player, float>();
-            var maxIndex = Math.Min(playersOrdered.Count - 1, Weights.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO - 1);
+            var maxIndex = Math.Min(playersOrdered.Count - 1, Weights.Instance.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO - 1);
             for (int i = 0; i < maxIndex; i++)
             {
                 if (playersOrdered.Count < i)
@@ -25,7 +25,7 @@ namespace TournamentMatcher.GamePicking
                 var scoreForMostBalancedGameYouCanMake = GetScoreForMostBalancedGame(player, playerToConsider, playersOrdered);
 
                 // If the partner is suitable but you can't make a sensible game with this partnership, discourage the partnership
-                if (scoreForMostBalancedGameYouCanMake > Weights.HandicapDifferenceBetweenTeamsToRetry)
+                if (scoreForMostBalancedGameYouCanMake > Weights.Instance.HandicapDifferenceBetweenTeamsToRetry)
                 {
                     partnerSuitabilityScore += scoreForMostBalancedGameYouCanMake * scoreForMostBalancedGameYouCanMake;
                     Debug.WriteLine("Adding points to stupid partnership " + player.Name + " + " + playerToConsider.Name + " because there are no sensible opponents.");
@@ -59,7 +59,7 @@ namespace TournamentMatcher.GamePicking
         public static List<Player> FindBestOpponents(List<Player> playersOrdered, Player player1, Player player2)
         {
             var potentialOpponents = new Dictionary<Player, float>();
-            var numTocheck = Math.Min(playersOrdered.Count, Weights.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO);
+            var numTocheck = Math.Min(playersOrdered.Count, Weights.Instance.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO);
             for (int i = 0; i < numTocheck; i++)
             {
                 if (playersOrdered.Count < i)

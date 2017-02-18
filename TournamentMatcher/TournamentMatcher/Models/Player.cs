@@ -85,7 +85,7 @@ namespace TournamentMatcher.Models
         {
             var x = GetTimesPartnered(p2);
 
-            return x * x * Weights.PartnerVariation;
+            return x * x * Weights.Instance.PartnerVariation;
         }
 
         public float GetPartnerSuitabilityScoreWithBands(Player p2)
@@ -98,7 +98,7 @@ namespace TournamentMatcher.Models
 
             var partnerScore = GetScoreIfIPlayWithPartner(p2);
 
-            var skillScoreWeighted = skillDifferenceBanded * Weights.SkillDifferenceForPartner;
+            var skillScoreWeighted = skillDifferenceBanded * Weights.Instance.SkillDifferenceForPartner;
             return skillScoreWeighted + partnerScore;
         }
 
@@ -111,9 +111,9 @@ namespace TournamentMatcher.Models
             var opponent1Score = GetScoreIfTheyPlayAgainst(opponent1);
             var opponent2Score = GetScoreIfTheyPlayAgainst(opponent2);
 
-            var skillScoreWeighted = skillDiff * Weights.SkillDifferenceForOpponent;
-            var opp1ScoreWeighted = opponent1Score * Weights.OpponentVariation;
-            var opp2ScoreWeighted = opponent2Score * Weights.OpponentVariation;
+            var skillScoreWeighted = skillDiff * Weights.Instance.SkillDifferenceForOpponent;
+            var opp1ScoreWeighted = opponent1Score * Weights.Instance.OpponentVariation;
+            var opp2ScoreWeighted = opponent2Score * Weights.Instance.OpponentVariation;
 
             return skillScoreWeighted + opp1ScoreWeighted + skillScoreWeighted + opp2ScoreWeighted;
         }
@@ -128,10 +128,10 @@ namespace TournamentMatcher.Models
             var opp2SkillDiff = GetScoreForHandicapDifference(opponent2.Handicap);
             var opponent2Score = GetScoreIfTheyPlayAgainst(opponent2);
 
-            var opp1SkillScoreWeighted = opp1SkillDiff * Weights.SkillDifferenceForOpponent;
-            var opp1ScoreWeighted = opponent1Score * Weights.OpponentVariation;
-            var opp2SkillScoreWeighted = opp2SkillDiff * Weights.SkillDifferenceForOpponent;
-            var opp2ScoreWeighted = opponent2Score * Weights.OpponentVariation;
+            var opp1SkillScoreWeighted = opp1SkillDiff * Weights.Instance.SkillDifferenceForOpponent;
+            var opp1ScoreWeighted = opponent1Score * Weights.Instance.OpponentVariation;
+            var opp2SkillScoreWeighted = opp2SkillDiff * Weights.Instance.SkillDifferenceForOpponent;
+            var opp2ScoreWeighted = opponent2Score * Weights.Instance.OpponentVariation;
 
             return opp1SkillScoreWeighted + opp1ScoreWeighted + opp2SkillScoreWeighted + opp2ScoreWeighted;
         }
@@ -140,7 +140,7 @@ namespace TournamentMatcher.Models
         {
             var skillDifference = GetScoreForHandicapDifference(p2.Handicap);
             var skillDifferenceBanded = skillDifference;
-            if (skillDifference < Weights.MinHandicapDifferenceToBand)
+            if (skillDifference < Weights.Instance.MinHandicapDifferenceToBand)
             {
                 skillDifferenceBanded = 0;
             }
@@ -152,7 +152,7 @@ namespace TournamentMatcher.Models
         {
             var skillDifference = GetScoreForHandicapDifference(p2Handicap);
             var skillDifferenceBanded = skillDifference;
-            if (skillDifference < Weights.MinHandicapDifferenceForOpponentsToBand)
+            if (skillDifference < Weights.Instance.MinHandicapDifferenceForOpponentsToBand)
             {
                 skillDifferenceBanded = 0;
             }
@@ -168,7 +168,7 @@ namespace TournamentMatcher.Models
             var skillDifference = GetScoreForHandicapDifference(p2.Handicap);
             var partnerScore = GetScoreIfIPlayWithPartner(p2);
 
-            var skillScoreWeighted = skillDifference * Weights.SkillDifferenceForPartner;
+            var skillScoreWeighted = skillDifference * Weights.Instance.SkillDifferenceForPartner;
             return skillScoreWeighted + partnerScore;
         }
 
