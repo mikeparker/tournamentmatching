@@ -22,7 +22,7 @@ namespace TournamentMatcher.GamePicking
 
                 var playerToConsider = playersOrdered[i];
                 var partnerSuitabilityScore = playerToConsider.GetPartnerSuitabilityScoreWithBands(player);
-                var scoreForMostBalancedGameYouCanMake = MatchPicker.GetScoreForMostBalancedGame(player, playerToConsider, playersOrdered.ToList());
+                var scoreForMostBalancedGameYouCanMake = MatchPicker.GetScoreForMostBalancedGame(player, playerToConsider, playersOrdered);
 
                 // If the partner is suitable but you can't make a sensible game with this partnership, discourage the partnership
                 if (scoreForMostBalancedGameYouCanMake > Weights.HandicapDifferenceBetweenTeamsToRetry)
@@ -43,9 +43,10 @@ namespace TournamentMatcher.GamePicking
             return allMatchingBestPartners.First().Key;
         }
 
-        public static int GetScoreForMostBalancedGame(Player player, Player playerToConsider, List<Player> playersCopy)
+        public static int GetScoreForMostBalancedGame(Player player, Player playerToConsider, List<Player> players)
         {
             var team1handicap = player.Handicap + playerToConsider.Handicap;
+            var playersCopy = players.ToList();
             playersCopy.Remove(playerToConsider);
 
             var opp1 = playersCopy[0];
@@ -113,24 +114,6 @@ namespace TournamentMatcher.GamePicking
             }
 
             return retval;
-        }
-
-        public static float GetOpponentSuitabilityScore(Player playerToConsider, Player opponent1, Player opponent2)
-        {
-            // Consider how many times you've played together
-            // Consider how many times you've partnered
-            // Consider skill difference
-            var opp1SkillDiff = playerToConsider.GetScoreForHandicapDifference(opponent1.Handicap);
-            var opponent1Score = playerToConsider.GetScoreIfTheyPlayAgainst(opponent1);
-            var opp2SkillDiff = playerToConsider.GetScoreForHandicapDifference(opponent2.Handicap);
-            var opponent2Score = playerToConsider.GetScoreIfTheyPlayAgainst(opponent2);
-
-            var opp1SkillScoreWeighted = opp1SkillDiff * Weights.SkillDifferenceForOpponent;
-            var opp1ScoreWeighted = opponent1Score * Weights.OpponentVariation;
-            var opp2SkillScoreWeighted = opp2SkillDiff * Weights.SkillDifferenceForOpponent;
-            var opp2ScoreWeighted = opponent2Score * Weights.OpponentVariation;
-
-            return opp1SkillScoreWeighted + opp1ScoreWeighted + opp2SkillScoreWeighted + opp2ScoreWeighted;
         }
     }
 }

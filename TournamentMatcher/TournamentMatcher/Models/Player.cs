@@ -118,6 +118,24 @@ namespace TournamentMatcher.Models
             return skillScoreWeighted + opp1ScoreWeighted + skillScoreWeighted + opp2ScoreWeighted;
         }
 
+        public float GetOpponentSuitabilityScore(Player opponent1, Player opponent2)
+        {
+            // Consider how many times you've played together
+            // Consider how many times you've partnered
+            // Consider skill difference
+            var opp1SkillDiff = GetScoreForHandicapDifference(opponent1.Handicap);
+            var opponent1Score = GetScoreIfTheyPlayAgainst(opponent1);
+            var opp2SkillDiff = GetScoreForHandicapDifference(opponent2.Handicap);
+            var opponent2Score = GetScoreIfTheyPlayAgainst(opponent2);
+
+            var opp1SkillScoreWeighted = opp1SkillDiff * Weights.SkillDifferenceForOpponent;
+            var opp1ScoreWeighted = opponent1Score * Weights.OpponentVariation;
+            var opp2SkillScoreWeighted = opp2SkillDiff * Weights.SkillDifferenceForOpponent;
+            var opp2ScoreWeighted = opponent2Score * Weights.OpponentVariation;
+
+            return opp1SkillScoreWeighted + opp1ScoreWeighted + opp2SkillScoreWeighted + opp2ScoreWeighted;
+        }
+
         public float GetBandedPartnerSkillDiff(Player p2)
         {
             var skillDifference = GetScoreForHandicapDifference(p2.Handicap);
