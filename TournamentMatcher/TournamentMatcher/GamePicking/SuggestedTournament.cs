@@ -15,7 +15,7 @@ namespace TournamentMatcher.GamePicking
         // each round has a set of matches
         // each match has 2 teams
         // each team has 2 players
-        public List<SuggestedTournamentRound> SuggestedTournamentRounds { get; }
+        public List<SuggestedTournamentRound> SuggestedTournamentRounds { get; private set; }
 
         public SuggestedTournament(List<Player> players, float weightDifferentPartners, float weightDifferentOpponents, float weightSimilarSkill)
         {

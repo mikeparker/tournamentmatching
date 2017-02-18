@@ -11,7 +11,7 @@ namespace TournamentMatcher
         {
             var fileString = FileTools.ReadFileString(filepath);
             var strings = fileString.Split('\n');
-            var results = strings.Select(ParsePlayer).ToList();
+            var results = strings.Select(ParsePlayer).Where(p => p != null).ToList();
             return results;
         }
 

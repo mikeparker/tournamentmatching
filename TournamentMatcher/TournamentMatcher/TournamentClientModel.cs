@@ -15,7 +15,7 @@ namespace TournamentMatcher
 
         public List<Player> PlayersInTournament { get; private set; }
         public List<CompletedTournamentRound> CompletedTournamentRounds { get; private set; }
-        public SortableBindingList<Player> PlayersBindingList { get; }
+        public SortableBindingList<Player> PlayersBindingList { get; private set; }
         public CompletedTournamentRound CurrentRound { get; private set; }
 
         public List<Player> AllPossiblePlayers { get; private set; }

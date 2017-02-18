@@ -23,29 +23,37 @@ namespace TournamentMatcher.Client
 
         private void btnAddPlayers_Click(object sender, EventArgs e)
         {
+            OpenAddPlayersForm();
+        }
+
+        private void OpenAddPlayersForm()
+        {
             AddRemovePlayersForm x = new AddRemovePlayersForm();
-            x.SetModel(tournamentClientModel);
+            x.SetModel(this.tournamentClientModel);
             x.ShowDialog(this);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
             DialogResult result = openFileDialog1.ShowDialog();
-            if (result == DialogResult.OK) // Test result.
+            if (result != DialogResult.OK)
             {
-                string filepath = openFileDialog1.FileName;
-                tournamentClientModel.LoadPlayersFromFile(filepath);
-                var count = tournamentClientModel.AllPossiblePlayers.Count;
-                if (count == 0)
-                {
-                    MessageBox.Show("Could not load players, please check file format is one player per line, Name followed by COMMA followed by handicap, e.g. Mike Parker, -13",
-                        "Error loading players", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show("Loaded " + count + " players.", "Loaded players", MessageBoxButtons.OK);
-                    btnAddPlayers.Enabled = true;
-                }
+                return;
+            }
+
+            string filepath = this.openFileDialog1.FileName;
+            this.tournamentClientModel.LoadPlayersFromFile(filepath);
+            var count = this.tournamentClientModel.AllPossiblePlayers.Count;
+            if (count == 0)
+            {
+                MessageBox.Show("Could not load players, please check file format is one player per line, Name followed by COMMA followed by handicap, e.g. Mike Parker, -13",
+                    "Error loading players", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                MessageBox.Show("Loaded " + count + " players.", "Loaded players", MessageBoxButtons.OK);
+                this.btnAddPlayers.Enabled = true;
+                OpenAddPlayersForm();
             }
         }
 
@@ -64,20 +72,9 @@ namespace TournamentMatcher.Client
             }
 
             var nextRound = SuggestedTournamentRound.CreateIntelligentRound(tournamentClientModel.PlayersBindingList.ToList());
-            List<MatchModel> nextRoundDescriptions = nextRound.SuggestedMatches.Select(m => new MatchModel(m.ToString())).ToList();
-            var x = new SortableBindingList<MatchModel>(nextRoundDescriptions);
+            var x = new SortableBindingList<SuggestedMatch>(nextRound.SuggestedMatches);
             dgvNextRound.DataSource = x;
             tournamentClientModel.GenerateNewRound();
-        }
-    }
-
-    public class MatchModel
-    {
-        public string Description { get; private set; }
-
-        public MatchModel(string description)
-        {
-            this.Description = description;
         }
     }
 }
