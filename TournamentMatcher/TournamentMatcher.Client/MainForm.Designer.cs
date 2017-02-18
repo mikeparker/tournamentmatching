@@ -229,7 +229,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Mikes Amazing Badminton Tournament Program";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNextRound)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGamesPlayed)).EndInit();
