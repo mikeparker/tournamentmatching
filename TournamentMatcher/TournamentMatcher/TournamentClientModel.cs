@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using TournamentMatcher.GamePicking;
 using TournamentMatcher.Models;
 
 namespace TournamentMatcher
@@ -13,7 +15,8 @@ namespace TournamentMatcher
 
         public List<Player> PlayersInTournament { get; private set; }
         public List<CompletedTournamentRound> CompletedTournamentRounds { get; private set; }
-        public SortableBindingList<Player> PlayersBindingList { get; private set; }
+        public SortableBindingList<Player> PlayersBindingList { get; }
+        public CompletedTournamentRound CurrentRound { get; private set; }
 
         public List<Player> AllPossiblePlayers { get; private set; }
 
@@ -40,6 +43,12 @@ namespace TournamentMatcher
             }
 
             AllPossiblePlayers = results;
+        }
+
+        public void GenerateNewRound()
+        {
+            var nextRound = SuggestedTournamentRound.CreateIntelligentRound(PlayersBindingList.ToList());
+//            CurrentRound = nextRound;
         }
     }
 

@@ -81,11 +81,77 @@ namespace TournamentMatcher.Models
             return this.OpponentsSoFar.Sum(kvp => (kvp.Value - 1) * (kvp.Value - 1)); // no idea if this is good
         }
 
-        public float GetScoreIfTheyPlayWithPartner(Player p2)
+        public float GetScoreIfIPlayWithPartner(Player p2)
         {
             var x = GetTimesPartnered(p2);
 
             return x * x * Weights.PartnerVariation;
+        }
+
+        public float GetPartnerSuitabilityScoreWithBands(Player p2)
+        {
+            // Consider how many times you've played together
+            // Consider how many times you've partnered
+            // Consider skill difference
+
+            var skillDifferenceBanded = GetBandedPartnerSkillDiff(p2);
+
+            var partnerScore = GetScoreIfIPlayWithPartner(p2);
+
+            var skillScoreWeighted = skillDifferenceBanded * Weights.SkillDifferenceForPartner;
+            return skillScoreWeighted + partnerScore;
+        }
+
+        public float GetOpponentSuitabilityScoreWithBands(Player opponent1, Player opponent2)
+        {
+            // Consider how many times you've played together
+            // Consider how many times you've partnered
+            // Consider skill difference
+            var skillDiff = GetBandedOpponentsSkillDiff(opponent1.Handicap); // Only use the initial players handicap so you dont get too extreme games
+            var opponent1Score = GetScoreIfTheyPlayAgainst(opponent1);
+            var opponent2Score = GetScoreIfTheyPlayAgainst(opponent2);
+
+            var skillScoreWeighted = skillDiff * Weights.SkillDifferenceForOpponent;
+            var opp1ScoreWeighted = opponent1Score * Weights.OpponentVariation;
+            var opp2ScoreWeighted = opponent2Score * Weights.OpponentVariation;
+
+            return skillScoreWeighted + opp1ScoreWeighted + skillScoreWeighted + opp2ScoreWeighted;
+        }
+
+        public float GetBandedPartnerSkillDiff(Player p2)
+        {
+            var skillDifference = GetScoreForHandicapDifference(p2.Handicap);
+            var skillDifferenceBanded = skillDifference;
+            if (skillDifference < Weights.MinHandicapDifferenceToBand)
+            {
+                skillDifferenceBanded = 0;
+            }
+
+            return skillDifferenceBanded;
+        }
+
+        public float GetBandedOpponentsSkillDiff(float p2Handicap)
+        {
+            var skillDifference = GetScoreForHandicapDifference(p2Handicap);
+            var skillDifferenceBanded = skillDifference;
+            if (skillDifference < Weights.MinHandicapDifferenceForOpponentsToBand)
+            {
+                skillDifferenceBanded = 0;
+            }
+
+            return skillDifferenceBanded;
+        }
+
+        public float GetPartnerSuitabilityScore(Player p2)
+        {
+            // Consider how many times you've played together
+            // Consider how many times you've partnered
+            // Consider skill difference
+            var skillDifference = GetScoreForHandicapDifference(p2.Handicap);
+            var partnerScore = GetScoreIfIPlayWithPartner(p2);
+
+            var skillScoreWeighted = skillDifference * Weights.SkillDifferenceForPartner;
+            return skillScoreWeighted + partnerScore;
         }
 
         public float GetScoreIfTheyPlayAgainst(Player opponent)

@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GamePicking\MatchPicker.cs" />
     <Compile Include="HandicapFileParser.cs" />
     <Compile Include="lib\FileTools.cs" />
     <Compile Include="lib\PropertyComparer.cs" />

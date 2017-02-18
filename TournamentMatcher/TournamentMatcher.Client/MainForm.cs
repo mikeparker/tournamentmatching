@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using TournamentMatcher.GamePicking;
@@ -56,15 +57,23 @@ namespace TournamentMatcher.Client
                 return;
             }
 
+            var dialogResult = MessageBox.Show(this, "Finalise round and create the next one?", "Finalise Round?", MessageBoxButtons.OKCancel );
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
+
             var nextRound = SuggestedTournamentRound.CreateIntelligentRound(tournamentClientModel.PlayersBindingList.ToList());
-            var nextRoundDescriptions = nextRound.SuggestedMatches.Select(m => new MatchModel(m.ToString())).ToList();
-            dgvNextRound.DataSource = nextRoundDescriptions;
+            List<MatchModel> nextRoundDescriptions = nextRound.SuggestedMatches.Select(m => new MatchModel(m.ToString())).ToList();
+            var x = new SortableBindingList<MatchModel>(nextRoundDescriptions);
+            dgvNextRound.DataSource = x;
+            tournamentClientModel.GenerateNewRound();
         }
     }
 
     public class MatchModel
     {
-        public string Description;
+        public string Description { get; private set; }
 
         public MatchModel(string description)
         {

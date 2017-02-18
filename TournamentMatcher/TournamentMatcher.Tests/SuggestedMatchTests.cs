@@ -20,7 +20,7 @@ namespace TournamentMatcher.Tests
                 playerTwo
             };
 
-            var scoreForMostBalancedGame = SuggestedMatch.GetScoreForMostBalancedGame(playerOne, playerTwo, restOfPlayers);
+            var scoreForMostBalancedGame = MatchPicker.GetScoreForMostBalancedGame(playerOne, playerTwo, restOfPlayers);
             Assert.That(scoreForMostBalancedGame, Is.EqualTo(40));
         }
 
@@ -36,7 +36,7 @@ namespace TournamentMatcher.Tests
                 playerTwo
             };
 
-            var scoreForMostBalancedGame = SuggestedMatch.GetScoreForMostBalancedGame(playerOne, playerTwo, restOfPlayers);
+            var scoreForMostBalancedGame = MatchPicker.GetScoreForMostBalancedGame(playerOne, playerTwo, restOfPlayers);
             Assert.That(scoreForMostBalancedGame, Is.EqualTo(40));
         }
     }

@@ -46,9 +46,10 @@
             // btnAddPlayers
             // 
             this.btnAddPlayers.Enabled = false;
-            this.btnAddPlayers.Location = new System.Drawing.Point(139, 463);
+            this.btnAddPlayers.Location = new System.Drawing.Point(185, 570);
+            this.btnAddPlayers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnAddPlayers.Name = "btnAddPlayers";
-            this.btnAddPlayers.Size = new System.Drawing.Size(128, 26);
+            this.btnAddPlayers.Size = new System.Drawing.Size(171, 32);
             this.btnAddPlayers.TabIndex = 0;
             this.btnAddPlayers.Text = "Add/Remove Players";
             this.btnAddPlayers.UseVisualStyleBackColor = true;
@@ -57,16 +58,19 @@
             // dgvPlayers
             // 
             this.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlayers.Location = new System.Drawing.Point(12, 46);
+            this.dgvPlayers.Location = new System.Drawing.Point(16, 57);
+            this.dgvPlayers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvPlayers.Name = "dgvPlayers";
-            this.dgvPlayers.Size = new System.Drawing.Size(210, 329);
+            this.dgvPlayers.RowHeadersVisible = false;
+            this.dgvPlayers.Size = new System.Drawing.Size(280, 405);
             this.dgvPlayers.TabIndex = 1;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(11, 463);
+            this.button1.Location = new System.Drawing.Point(15, 570);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(122, 26);
+            this.button1.Size = new System.Drawing.Size(163, 32);
             this.button1.TabIndex = 2;
             this.button1.Text = "Load Handicaps File";
             this.button1.UseVisualStyleBackColor = true;
@@ -79,63 +83,71 @@
             // 
             // button2
             // 
-            this.button2.Enabled = true;
-            this.button2.Location = new System.Drawing.Point(497, 463);
+            this.button2.Location = new System.Drawing.Point(683, 570);
+            this.button2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(128, 26);
+            this.button2.Size = new System.Drawing.Size(171, 32);
             this.button2.TabIndex = 3;
-            this.button2.Text = "Generate Round";
+            this.button2.Text = "Generate Next Round";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 19);
+            this.label1.Location = new System.Drawing.Point(16, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(55, 17);
             this.label1.TabIndex = 4;
             this.label1.Text = "Players";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(494, 19);
+            this.label2.Location = new System.Drawing.Point(680, 23);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 13);
+            this.label2.Size = new System.Drawing.Size(82, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Next Round";
             // 
             // dgvNextRound
             // 
             this.dgvNextRound.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNextRound.Location = new System.Drawing.Point(497, 46);
+            this.dgvNextRound.Location = new System.Drawing.Point(683, 57);
+            this.dgvNextRound.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvNextRound.Name = "dgvNextRound";
-            this.dgvNextRound.Size = new System.Drawing.Size(192, 329);
+            this.dgvNextRound.RowHeadersVisible = false;
+            this.dgvNextRound.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvNextRound.Size = new System.Drawing.Size(464, 405);
             this.dgvNextRound.TabIndex = 5;
             // 
             // dgvGamesPlayed
             // 
             this.dgvGamesPlayed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGamesPlayed.Location = new System.Drawing.Point(267, 46);
+            this.dgvGamesPlayed.Location = new System.Drawing.Point(304, 57);
+            this.dgvGamesPlayed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dgvGamesPlayed.Name = "dgvGamesPlayed";
-            this.dgvGamesPlayed.Size = new System.Drawing.Size(192, 329);
+            this.dgvGamesPlayed.RowHeadersVisible = false;
+            this.dgvGamesPlayed.Size = new System.Drawing.Size(371, 405);
             this.dgvGamesPlayed.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(275, 19);
+            this.label3.Location = new System.Drawing.Point(301, 23);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 13);
+            this.label3.Size = new System.Drawing.Size(100, 17);
             this.label3.TabIndex = 4;
             this.label3.Text = "Games Played";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 501);
+            this.ClientSize = new System.Drawing.Size(1160, 617);
             this.Controls.Add(this.dgvGamesPlayed);
             this.Controls.Add(this.dgvNextRound);
             this.Controls.Add(this.label3);
@@ -145,6 +157,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dgvPlayers);
             this.Controls.Add(this.btnAddPlayers);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
