@@ -71,10 +71,10 @@ namespace TournamentMatcher.Client
                 return;
             }
 
-            var nextRound = SuggestedTournamentRound.CreateIntelligentRound(tournamentClientModel.PlayersBindingList.ToList());
-            var x = new SortableBindingList<SuggestedMatch>(nextRound.SuggestedMatches);
-            dgvNextRound.DataSource = x;
-            tournamentClientModel.GenerateNewRound();
+            tournamentClientModel.FinaliseCurrentRoundAndGenerateNext();
+            this.dgvNextRound.DataSource = tournamentClientModel.CurrentRoundBindingList;
+            this.dgvGamesPlayed.DataSource = tournamentClientModel.PreviousRoundsBindingList;
+            this.lblSittingOut.Text = "Sitting out:" + string.Join(", ", tournamentClientModel.CurrentRound.PlayersSittingOut.Select(p => p.Name));
         }
     }
 }

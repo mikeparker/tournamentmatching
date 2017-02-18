@@ -6,34 +6,34 @@ using TournamentMatcher.Models;
 
 namespace TournamentMatcher.GamePicking
 {
-    public class SuggestedTournamentRound
+    public class TournamentRound
     {
         public List<Player> PlayersSittingOut { get; private set; } 
-        public List<SuggestedMatch> SuggestedMatches;
+        public List<Match> SuggestedMatches;
 
-        public SuggestedTournamentRound()
+        public TournamentRound()
         {
             this.PlayersSittingOut = new List<Player>();
-            this.SuggestedMatches = new List<SuggestedMatch>();
+            this.SuggestedMatches = new List<Match>();
         }
 
-        public static SuggestedTournamentRound CreateIntelligentRound(List<Player> players)
+        public static TournamentRound CreateIntelligentRound(List<Player> players)
         {
             players.Shuffle();
-            var round = new SuggestedTournamentRound();
+            var round = new TournamentRound();
 
             var playersSittingOut = CalculatePlayersSittingOutNext(players);
             round.AddPlayersSittingOut(playersSittingOut);
             var playingPlayers = players.Except(playersSittingOut).ToList();
             List<Player> remainingPlayers;
             bool topFirst = true;
-            var match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
+            var match = Match.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
             while (match != null)
             {
                 topFirst = !topFirst;
                 round.AddMatch(match, topFirst);
                 playingPlayers = remainingPlayers;
-                match = SuggestedMatch.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
+                match = Match.CreateMatchFromIntelligentlySelectedPlayers(playingPlayers, out remainingPlayers, topFirst);
             }
 
             if (remainingPlayers.Count != 0)
@@ -65,7 +65,7 @@ namespace TournamentMatcher.GamePicking
             this.PlayersSittingOut.AddRange(players);
         }
 
-        private void AddMatch(SuggestedMatch match, bool topFirst)
+        private void AddMatch(Match match, bool topFirst)
         {
             if (!topFirst)
             {

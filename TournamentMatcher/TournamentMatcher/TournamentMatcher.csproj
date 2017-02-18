@@ -46,9 +46,9 @@
     <Compile Include="lib\SortableBindingList.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="lib\ShuffleExtensions.cs" />
-    <Compile Include="GamePicking\SuggestedMatch.cs" />
+    <Compile Include="GamePicking\Match.cs" />
     <Compile Include="GamePicking\SuggestedTournament.cs" />
-    <Compile Include="GamePicking\SuggestedTournamentRound.cs" />
+    <Compile Include="GamePicking\TournamentRound.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="TournamentClientModel.cs" />
     <Compile Include="GamePicking\TournamentMatcher.cs" />

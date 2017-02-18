@@ -7,13 +7,13 @@ using TournamentMatcher.Models;
 namespace TournamentMatcher.GamePicking
 {
     [DebuggerDisplay("{ToString()}")]
-    public class SuggestedMatch
+    public class Match
     {
         public Team Team1 { get; private set; }
         public Team Team2 { get; private set; }
         private readonly float absHandicapDifference;
 
-        private SuggestedMatch(Player p1, Player p2, Player p3, Player p4)
+        private Match(Player p1, Player p2, Player p3, Player p4)
         {
             this.Team1 = new Team(p1, p2);
             this.Team2 = new Team(p3, p4);
@@ -25,7 +25,7 @@ namespace TournamentMatcher.GamePicking
             return "Match:" + this.Team1.Player1.Name + " + " + this.Team1.Player2.Name + " vs " + this.Team2.Player1.Name + " + " + this.Team2.Player2.Name + " | Hcap: " + this.absHandicapDifference;
         }
 
-        public static SuggestedMatch CreateMatchFromIntelligentlySelectedPlayers(List<Player> allPlayersRandomised, out List<Player> remainingPlayers, bool topFirst)
+        public static Match CreateMatchFromIntelligentlySelectedPlayers(List<Player> allPlayersRandomised, out List<Player> remainingPlayers, bool topFirst)
         {
             if (allPlayersRandomised.Count < 4)
             {
@@ -41,7 +41,7 @@ namespace TournamentMatcher.GamePicking
             var bestPartner = MatchPicker.FindBestPartner(playersOrdered, initialPlayer);
             playersOrdered.Remove(bestPartner);
 
-            SuggestedMatch match;
+            Match match;
             List<Player> bestOpponents = FindBestOpponentsAndMakeMatch(playersOrdered, initialPlayer, bestPartner, out match);
 
             match.Finalise();
@@ -64,14 +64,14 @@ namespace TournamentMatcher.GamePicking
             this.Team1.FinaliseGame(Team2);
         }
 
-        private static List<Player> FindBestOpponentsAndMakeMatch(List<Player> playersOrdered, Player initialPlayer, Player bestPartner, out SuggestedMatch match)
+        private static List<Player> FindBestOpponentsAndMakeMatch(List<Player> playersOrdered, Player initialPlayer, Player bestPartner, out Match match)
         {
             var bestOpponents = MatchPicker.FindBestOpponents(playersOrdered, initialPlayer, bestPartner);
             var p1 = initialPlayer;
             var p2 = bestPartner;
             var p3 = bestOpponents[0];
             var p4 = bestOpponents[1];
-            match = new SuggestedMatch(p1, p2, p3, p4);
+            match = new Match(p1, p2, p3, p4);
             return bestOpponents;
         }
 

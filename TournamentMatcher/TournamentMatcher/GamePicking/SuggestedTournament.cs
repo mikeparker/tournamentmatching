@@ -15,7 +15,7 @@ namespace TournamentMatcher.GamePicking
         // each round has a set of matches
         // each match has 2 teams
         // each team has 2 players
-        public List<SuggestedTournamentRound> SuggestedTournamentRounds { get; private set; }
+        public List<TournamentRound> SuggestedTournamentRounds { get; private set; }
 
         public SuggestedTournament(List<Player> players, float weightDifferentPartners, float weightDifferentOpponents, float weightSimilarSkill)
         {
@@ -23,7 +23,7 @@ namespace TournamentMatcher.GamePicking
             this.weightDifferentPartners = weightDifferentPartners;
             this.weightDifferentOpponents = weightDifferentOpponents;
             this.weightSimilarSkill = weightSimilarSkill;
-            this.SuggestedTournamentRounds = new List<SuggestedTournamentRound>();
+            this.SuggestedTournamentRounds = new List<TournamentRound>();
         }
 
         public static SuggestedTournament CreateRandomTournament(List<Player> players, int numRounds, 
@@ -33,8 +33,8 @@ namespace TournamentMatcher.GamePicking
 
             for (int i = 0; i < numRounds; i++)
             {
-                var currentRound = SuggestedTournamentRound.CreateIntelligentRound(players);
-//                var currentRound = SuggestedTournamentRound.CreateRandomRound(players);
+                var currentRound = TournamentRound.CreateIntelligentRound(players);
+//                var currentRound = TournamentRound.CreateRandomRound(players);
                 newTournament.AddRound(currentRound);
                 Debug.WriteLine("*** Creating Round " + i + " *******");
             }
@@ -51,7 +51,7 @@ namespace TournamentMatcher.GamePicking
 
         public float Score { get; private set; }
 
-        private void AddRound(SuggestedTournamentRound currentRound)
+        private void AddRound(TournamentRound currentRound)
         {
             this.SuggestedTournamentRounds.Add(currentRound);
         }

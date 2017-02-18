@@ -11,12 +11,17 @@ namespace TournamentMatcher
         public TournamentClientModel()
         {
             PlayersBindingList = new SortableBindingList<Player>();
+            CurrentRoundBindingList = new SortableBindingList<Match>();
+            PreviousRoundsBindingList = new SortableBindingList<Match>();
+            PreviousRounds = new List<TournamentRound>();
         }
 
         public List<Player> PlayersInTournament { get; private set; }
-        public List<CompletedTournamentRound> CompletedTournamentRounds { get; private set; }
+        public List<TournamentRound> PreviousRounds { get; private set; }
         public SortableBindingList<Player> PlayersBindingList { get; private set; }
-        public CompletedTournamentRound CurrentRound { get; private set; }
+        public SortableBindingList<Match> CurrentRoundBindingList { get; private set; }
+        public SortableBindingList<Match> PreviousRoundsBindingList { get; private set; }
+        public TournamentRound CurrentRound { get; private set; }
 
         public List<Player> AllPossiblePlayers { get; private set; }
 
@@ -45,37 +50,24 @@ namespace TournamentMatcher
             AllPossiblePlayers = results;
         }
 
-        public void GenerateNewRound()
+        public void FinaliseCurrentRoundAndGenerateNext()
         {
-            var nextRound = SuggestedTournamentRound.CreateIntelligentRound(PlayersBindingList.ToList());
-//            CurrentRound = nextRound;
-        }
-    }
+            var nextRound = TournamentRound.CreateIntelligentRound(PlayersBindingList.ToList());
+            if (CurrentRound != null)
+            {
+                this.PreviousRounds.Add(CurrentRound);
+                foreach (var suggestedMatch in CurrentRound.SuggestedMatches)
+                {
+                    PreviousRoundsBindingList.Add(suggestedMatch);
+                }
+            }
 
-    public class CompletedTournamentRound
-    {
-        // each round has a number of games
-        // and a number of people that sat out
-        private List<Player> playersThatSatOut = new List<Player>();
-        private List<CompletedGame> CompletedGame = new List<CompletedGame>();
-    }
-
-    public class CompletedGame
-    {
-        private Team team1;
-        private Team team2;
-        private GameScore gameScore;
-    }
-
-    public class GameScore
-    {
-        public readonly int Team1Score;
-        public readonly int Team2Score;
-
-        public GameScore(int team1Score, int team2Score)
-        {
-            this.Team1Score = team1Score;
-            this.Team2Score = team2Score;
+            CurrentRound = nextRound;
+            CurrentRoundBindingList.Clear();
+            foreach (var suggestedMatch in CurrentRound.SuggestedMatches)
+            {
+                CurrentRoundBindingList.Add(suggestedMatch);
+            }
         }
     }
 }
