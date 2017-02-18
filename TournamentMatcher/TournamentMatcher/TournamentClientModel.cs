@@ -6,12 +6,25 @@ namespace TournamentMatcher
 {
     public class TournamentClientModel
     {
-        private List<Player> allPossiblePlayers = new List<Player>();
-        private List<CompletedTournamentRound> completedTournamentRounds = new List<CompletedTournamentRound>();
-
-        public List<Player> AllPossiblePlayers
+        public TournamentClientModel()
         {
-            get { return this.allPossiblePlayers; }
+            PlayersBindingList = new SortableBindingList<Player>();
+        }
+
+        public List<Player> PlayersInTournament { get; private set; }
+        public List<CompletedTournamentRound> CompletedTournamentRounds { get; private set; }
+        public SortableBindingList<Player> PlayersBindingList { get; private set; }
+
+        public List<Player> AllPossiblePlayers { get; private set; }
+
+        public void SetPlayersInTournament(List<Player> players)
+        {
+            PlayersInTournament = players;
+            PlayersBindingList.Clear();
+            foreach (var player in players)
+            {
+                PlayersBindingList.Add(player);
+            }
         }
 
         public void LoadPlayersFromFile(string filepath)
@@ -26,7 +39,7 @@ namespace TournamentMatcher
                 results = new List<Player>();
             }
 
-            this.allPossiblePlayers = results;
+            AllPossiblePlayers = results;
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Forms;
 using TournamentMatcher.Models;
 
@@ -8,22 +9,13 @@ namespace TournamentMatcher.Client
 {
     public partial class AddRemovePlayersForm : Form
     {
-        private List<Player> allPossiblePlayers;
         private SortableBindingList<Player> currentPlayersNotPlaying;
         private SortableBindingList<Player> currentTournamentPlayers;
+        private TournamentClientModel model;
 
         public AddRemovePlayersForm()
         {
             InitializeComponent();
-        }
-
-        public void SetPlayers(List<Player> allPossiblePlayers)
-        {
-            this.currentPlayersNotPlaying = new SortableBindingList<Player>(allPossiblePlayers);
-            this.allPossiblePlayers = allPossiblePlayers;
-            currentTournamentPlayers = new SortableBindingList<Player>();
-            SetDataGrid(this.dataGridView1, this.currentPlayersNotPlaying);
-            SetDataGrid(this.dataGridView2, this.currentTournamentPlayers);
         }
 
         private void SetDataGrid(DataGridView dataGridView, BindingList<Player> playersList)
@@ -34,8 +26,9 @@ namespace TournamentMatcher.Client
             dataGridView.Columns[4].Visible = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnOk_Click(object sender, EventArgs e)
         {
+            model.SetPlayersInTournament(currentTournamentPlayers.ToList());
             this.Close();
         }
 
@@ -79,6 +72,15 @@ namespace TournamentMatcher.Client
         private void button2_Click(object sender, EventArgs e)
         {
             MovePlayers(this.dataGridView2, this.currentTournamentPlayers, this.currentPlayersNotPlaying);
+        }
+
+        public void SetModel(TournamentClientModel tournamentClientModel)
+        {
+            this.model = tournamentClientModel;
+            this.currentPlayersNotPlaying = new SortableBindingList<Player>(tournamentClientModel.AllPossiblePlayers);
+            currentTournamentPlayers = new SortableBindingList<Player>();
+            SetDataGrid(this.dataGridView1, this.currentPlayersNotPlaying);
+            SetDataGrid(this.dataGridView2, this.currentTournamentPlayers);
         }
     }
 }

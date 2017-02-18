@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using TournamentMatcher.GamePicking;
 
 namespace TournamentMatcher.Client
 {
@@ -18,12 +13,17 @@ namespace TournamentMatcher.Client
         {
             InitializeComponent();
             this.tournamentClientModel = new TournamentClientModel();
+
+            dgvPlayers.DataSource = tournamentClientModel.PlayersBindingList;
+            dgvPlayers.Columns[2].Visible = false;
+            dgvPlayers.Columns[3].Visible = false;
+            dgvPlayers.Columns[4].Visible = false;
         }
 
         private void btnAddPlayers_Click(object sender, EventArgs e)
         {
             AddRemovePlayersForm x = new AddRemovePlayersForm();
-            x.SetPlayers(tournamentClientModel.AllPossiblePlayers);
+            x.SetModel(tournamentClientModel);
             x.ShowDialog(this);
         }
 
@@ -46,6 +46,29 @@ namespace TournamentMatcher.Client
                     btnAddPlayers.Enabled = true;
                 }
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (!tournamentClientModel.PlayersBindingList.Any())
+            {
+                MessageBox.Show("Please select players before trying to generate a round.");
+                return;
+            }
+
+            var nextRound = SuggestedTournamentRound.CreateIntelligentRound(tournamentClientModel.PlayersBindingList.ToList());
+            var nextRoundDescriptions = nextRound.SuggestedMatches.Select(m => new MatchModel(m.ToString())).ToList();
+            dgvNextRound.DataSource = nextRoundDescriptions;
+        }
+    }
+
+    public class MatchModel
+    {
+        public string Description;
+
+        public MatchModel(string description)
+        {
+            this.Description = description;
         }
     }
 }

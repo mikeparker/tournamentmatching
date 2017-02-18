@@ -10,8 +10,10 @@ Should we separate the round picking and the scores?
 For now, separate the scoring
 
 So all we need to do to is: Pick a round, display teh next round, who's sitting out
-- option for removing / adding people
-
+- Parameters to post: The list of players
+- Things to display from the round:
+--- The matches
+--- Who is sitting out
 
 
 
