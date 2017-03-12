@@ -4,6 +4,7 @@
     {
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
+        public int FinalScore { get; set; }
         private readonly float totalHandicap;
 
         public Team(Player p1, Player p2)

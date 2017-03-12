@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TournamentMatcher.GamePicking;
 
 namespace TournamentMatcher.Client
 {
@@ -58,7 +59,7 @@ namespace TournamentMatcher.Client
             }
             else
             {
-                MessageBox.Show("Loaded " + count + " players.", "Loaded players", MessageBoxButtons.OK);
+//                MessageBox.Show("Loaded " + count + " players.", "Loaded players", MessageBoxButtons.OK);
                 this.btnAddPlayers.Enabled = true;
                 OpenAddPlayersForm();
             }
@@ -91,6 +92,8 @@ namespace TournamentMatcher.Client
             this.dgvGamesPlayed.SetNotColumnSortable();
             this.dgvNextRound.SetNotColumnSortable();
             this.dgvGamesPlayed.SetColumnEditable(2);
+            this.dgvGamesPlayed.AutosizeColumns();
+            this.dgvNextRound.AutosizeColumns();
         }
 
         private void openHandicapsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -130,6 +133,21 @@ namespace TournamentMatcher.Client
 
             tournamentClientModel.FinaliseCurrentRoundAndGenerateFinalRound();
             RefreshUI();
+        }
+
+        private void btnEnterScore_Click(object sender, EventArgs e)
+        {
+            var firstSelectedRow = dgvNextRound.SelectedRows.Cast<DataGridViewRow>().FirstOrDefault();
+            if (firstSelectedRow == null)
+            {
+                return;
+            }
+
+            var match = (Match)firstSelectedRow.DataBoundItem;
+            if (match != null)
+            {
+                new EnterScoreForm(match, dgvNextRound).Show(this);
+            }
         }
     }
 }

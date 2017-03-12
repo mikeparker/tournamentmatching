@@ -46,6 +46,7 @@
             this.tournamentSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnGenerateFinalRound = new System.Windows.Forms.Button();
+            this.btnEnterScore = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNextRound)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGamesPlayed)).BeginInit();
@@ -69,6 +70,7 @@
             this.dgvPlayers.Location = new System.Drawing.Point(12, 54);
             this.dgvPlayers.Name = "dgvPlayers";
             this.dgvPlayers.RowHeadersVisible = false;
+            this.dgvPlayers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlayers.Size = new System.Drawing.Size(210, 329);
             this.dgvPlayers.TabIndex = 1;
             // 
@@ -122,6 +124,7 @@
             this.dgvNextRound.Name = "dgvNextRound";
             this.dgvNextRound.RowHeadersVisible = false;
             this.dgvNextRound.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.dgvNextRound.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvNextRound.Size = new System.Drawing.Size(577, 329);
             this.dgvNextRound.TabIndex = 5;
             // 
@@ -131,6 +134,7 @@
             this.dgvGamesPlayed.Location = new System.Drawing.Point(228, 54);
             this.dgvGamesPlayed.Name = "dgvGamesPlayed";
             this.dgvGamesPlayed.RowHeadersVisible = false;
+            this.dgvGamesPlayed.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGamesPlayed.Size = new System.Drawing.Size(478, 329);
             this.dgvGamesPlayed.TabIndex = 5;
             // 
@@ -146,10 +150,11 @@
             // lblSittingOut
             // 
             this.lblSittingOut.AutoSize = true;
-            this.lblSittingOut.Location = new System.Drawing.Point(510, 390);
+            this.lblSittingOut.Location = new System.Drawing.Point(709, 395);
             this.lblSittingOut.Name = "lblSittingOut";
-            this.lblSittingOut.Size = new System.Drawing.Size(0, 13);
+            this.lblSittingOut.Size = new System.Drawing.Size(57, 13);
             this.lblSittingOut.TabIndex = 6;
+            this.lblSittingOut.Text = "Sitting out:";
             // 
             // menuStrip1
             // 
@@ -212,11 +217,22 @@
             this.btnGenerateFinalRound.UseVisualStyleBackColor = true;
             this.btnGenerateFinalRound.Click += new System.EventHandler(this.btnGenerateFinalRound_Click);
             // 
+            // btnEnterScore
+            // 
+            this.btnEnterScore.Location = new System.Drawing.Point(946, 395);
+            this.btnEnterScore.Name = "btnEnterScore";
+            this.btnEnterScore.Size = new System.Drawing.Size(128, 37);
+            this.btnEnterScore.TabIndex = 11;
+            this.btnEnterScore.Text = "Enter Score";
+            this.btnEnterScore.UseVisualStyleBackColor = true;
+            this.btnEnterScore.Click += new System.EventHandler(this.btnEnterScore_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1301, 501);
+            this.Controls.Add(this.btnEnterScore);
             this.Controls.Add(this.btnGenerateFinalRound);
             this.Controls.Add(this.lblSittingOut);
             this.Controls.Add(this.dgvGamesPlayed);
@@ -262,6 +278,7 @@
         private System.Windows.Forms.ToolStripMenuItem tournamentSettingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button btnGenerateFinalRound;
+        private System.Windows.Forms.Button btnEnterScore;
     }
 }
 

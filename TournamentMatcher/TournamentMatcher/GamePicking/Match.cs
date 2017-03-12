@@ -98,5 +98,22 @@ namespace TournamentMatcher.GamePicking
             var stdDev = (this.Team1.GetStdDevHandicap(avgHandicap) + this.Team2.GetStdDevHandicap(avgHandicap))/2;
             return stdDev;
         }
+
+        public Team FindTeamForPlayer(Player player)
+        {
+            if (Team1.Player1 == player || Team1.Player2 == player)
+            {
+                return Team1;
+            }
+                
+            return Team2;
+        }
+
+        public void SetScore(int team1Score, int team2Score)
+        {
+            this.Team1.FinalScore = team1Score;
+            this.Team2.FinalScore = team2Score;
+            this.Score = team1Score + "-" + team2Score;
+        }
     }
 }

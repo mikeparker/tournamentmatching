@@ -50,6 +50,12 @@
     <Compile Include="AddRemovePlayersForm.Designer.cs">
       <DependentUpon>AddRemovePlayersForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="EnterScoreForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EnterScoreForm.Designer.cs">
+      <DependentUpon>EnterScoreForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExampleTournamentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     </Compile>
     <EmbeddedResource Include="AddRemovePlayersForm.resx">
       <DependentUpon>AddRemovePlayersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnterScoreForm.resx">
+      <DependentUpon>EnterScoreForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExampleTournamentForm.resx">
       <DependentUpon>ExampleTournamentForm.cs</DependentUpon>

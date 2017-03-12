@@ -26,5 +26,12 @@ namespace TournamentMatcher.Client
                 }
             }
         }
+
+        public static void AutosizeColumns(this DataGridView dataGridView)
+        {
+            dataGridView.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        }
     }
 }

@@ -11,6 +11,12 @@ namespace TournamentMatcher.Models
     {
         public string Name { get; set; }
         public float Handicap { get; private set; }
+
+        public int Score
+        {
+            get { return MatchesPlayed.Sum(m => m.FindTeamForPlayer(this).FinalScore); }
+        }
+
         public int NumberOfGamesSatOutSoFar { get; set; }
         public List<Match> MatchesPlayed { get; set; }
         public Dictionary<Player, int> PartnersSoFar { get; private set; } 
