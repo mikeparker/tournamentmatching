@@ -40,6 +40,7 @@ namespace TournamentMatcher.GamePicking
             var initialPlayer = playersOrdered[0];
             playersOrdered.RemoveAt(0);
 
+            // TODO: Don't pick best partner first?
             var bestPartner = MatchPicker.FindBestPartner(playersOrdered, initialPlayer);
             playersOrdered.Remove(bestPartner);
 

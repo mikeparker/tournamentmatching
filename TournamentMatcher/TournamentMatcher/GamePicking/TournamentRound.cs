@@ -38,7 +38,7 @@ namespace TournamentMatcher.GamePicking
 
             if (remainingPlayers.Count != 0)
             {
-                throw new Exception("Was not expecting any remainig players!");
+                throw new Exception("Was not expecting any remaining players!");
             }
 
             return round;

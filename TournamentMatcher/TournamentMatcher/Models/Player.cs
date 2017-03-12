@@ -216,5 +216,10 @@ namespace TournamentMatcher.Models
         {
             return Name;
         }
+
+        public Player Clone()
+        {
+            return new Player(this.Name, this.Handicap);
+        }
     }
 }

@@ -1,4 +1,6 @@
+using System.Drawing;
 using System.Windows.Forms;
+using TournamentMatcher.GamePicking;
 
 namespace TournamentMatcher.Client
 {
@@ -33,5 +35,25 @@ namespace TournamentMatcher.Client
             dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
         }
+
+        public static void RefreshWithColours(this DataGridView dataGridView)
+        {
+            foreach (var obj in dataGridView.Rows)
+            {
+                var row = (DataGridViewRow)obj;
+                var match = (Match)row.DataBoundItem;
+                if (match.Team1.FinalScore == 21)
+                {
+                    row.Cells[0].Style.BackColor = Color.DarkSeaGreen;
+                    row.Cells[1].Style.BackColor = Color.PaleVioletRed;
+                }
+                else if (match.Team2.FinalScore == 21)
+                {
+                    row.Cells[1].Style.BackColor = Color.DarkSeaGreen;
+                    row.Cells[0].Style.BackColor = Color.PaleVioletRed;
+                }
+            }
+        }
+
     }
 }

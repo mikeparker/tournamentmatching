@@ -15,9 +15,9 @@ namespace TournamentMatcher.Client
             this.tournamentClientModel = new TournamentClientModel();
 
             dgvPlayers.DataSource = tournamentClientModel.PlayersBindingList;
-            dgvPlayers.Columns[2].Visible = false;
             dgvPlayers.Columns[3].Visible = false;
             dgvPlayers.Columns[4].Visible = false;
+            this.dgvPlayers.Columns[5].Visible = false;
         }
 
         private void btnAddPlayers_Click(object sender, EventArgs e)

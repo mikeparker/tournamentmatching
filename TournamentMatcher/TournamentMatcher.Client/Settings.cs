@@ -24,6 +24,7 @@ namespace TournamentMatcher.Client
             sliderOpponentVariation.Value = Weights.Instance.OpponentVariation;
             sliderPartnerSkillDiff.Value = (int) (Weights.Instance.SkillDifferenceForPartner*10);
             sliderOpponentSkillDiff.Value = (int) (Weights.Instance.SkillDifferenceForOpponent*10);
+            sliderBalancedTeams.Value = (int) (Weights.Instance.BalancedTeams*10);
         }
 
         private void btnResetDefaults_Click(object sender, EventArgs e)
@@ -35,11 +36,6 @@ namespace TournamentMatcher.Client
         private void btnCancel_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private void slider1_ValueChanged(object sender, EventArgs e)
-        {
-            lblPartnerVariation.Text = "Partner Variation : " + sliderPartnerVariation.Value;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -54,6 +50,12 @@ namespace TournamentMatcher.Client
             Weights.Instance.OpponentVariation = this.sliderOpponentVariation.Value;
             Weights.Instance.SkillDifferenceForPartner = this.sliderPartnerSkillDiff.Value / 10f;
             Weights.Instance.SkillDifferenceForOpponent = this.sliderOpponentSkillDiff.Value / 10f;
+            Weights.Instance.BalancedTeams = this.sliderBalancedTeams.Value / 10f;
+        }
+
+        private void slider1_ValueChanged(object sender, EventArgs e)
+        {
+            lblPartnerVariation.Text = "Partner Variation : " + sliderPartnerVariation.Value;
         }
 
         private void sliderOpponentVariation_ValueChanged(object sender, EventArgs e)
@@ -71,6 +73,11 @@ namespace TournamentMatcher.Client
             lblOpponentSkillDiff.Text = "Opponent Skill Diff : " + sliderOpponentSkillDiff.Value;
         }
 
+        private void sliderBalancedTeams_ValueChanged(object sender, EventArgs e)
+        {
+            lblBalancedTeams.Text = "Balanced Teams : " + sliderBalancedTeams.Value;
+        }
+
         private void btnGenerateExampleTournament_Click(object sender, EventArgs e)
         {
             SaveWeights();
@@ -81,8 +88,9 @@ namespace TournamentMatcher.Client
             }
             else
             {
-                players = playersInTournament;
+                players = playersInTournament.Select(p => p.Clone()).ToList();
             }
+
             var sut = new GamePicking.TournamentMatcher(players);
 
             var result = sut.CreateRandomisedTournament(6);
@@ -163,6 +171,16 @@ namespace TournamentMatcher.Client
             players.Add(new Player("Sense", -3));
 
             return players;
+        }
+
+        private void lblBalancedTeams_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Settings_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

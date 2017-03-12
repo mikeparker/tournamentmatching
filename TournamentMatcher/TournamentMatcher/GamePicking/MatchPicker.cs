@@ -27,7 +27,7 @@ namespace TournamentMatcher.GamePicking
                 // If the partner is suitable but you can't make a sensible game with this partnership, discourage the partnership
                 if (scoreForMostBalancedGameYouCanMake > Weights.Instance.HandicapDifferenceBetweenTeamsToRetry)
                 {
-                    partnerSuitabilityScore += scoreForMostBalancedGameYouCanMake * scoreForMostBalancedGameYouCanMake;
+                    partnerSuitabilityScore += (scoreForMostBalancedGameYouCanMake * scoreForMostBalancedGameYouCanMake) * Weights.Instance.BalancedTeams;
                     Debug.WriteLine("Adding points to stupid partnership " + player.Name + " + " + playerToConsider.Name + " because there are no sensible opponents.");
                 }
 
@@ -45,18 +45,46 @@ namespace TournamentMatcher.GamePicking
 
         public static int GetScoreForMostBalancedGame(Player player, Player playerToConsider, List<Player> players)
         {
-            var team1handicap = player.Handicap + playerToConsider.Handicap;
             var playersCopy = players.ToList();
             playersCopy.Remove(playerToConsider);
 
             var opp1 = playersCopy[0];
             var opp2 = playersCopy[1];
 
-            var team2handicap = opp1.Handicap + opp2.Handicap;
+            return GetScoreForGame(player, playerToConsider, opp1, opp2);
+        }
+
+        public static int GetScoreForMostBalancedGame2(Player player1, Player player2, Player player3, List<Player> players)
+        {
+            var playersCopy = players.ToList();
+            playersCopy.Remove(player3);
+
+            var player4 = playersCopy[0];
+            return GetScoreForGame(player1, player2, player3, player4);
+        }
+
+        public static int GetScoreForGame(Player player1, Player player2, Player player3, Player player4)
+        {
+            var team1handicap = player1.Handicap + player2.Handicap;
+            var team2handicap = player3.Handicap + player4.Handicap;
             return (int)Math.Abs(team1handicap - team2handicap);
         }
 
         public static List<Player> FindBestOpponents(List<Player> playersOrdered, Player player1, Player player2)
+        {
+            var firstOpponent = GetBestFirstOpponent(playersOrdered, player1, player2);
+            playersOrdered.Remove(firstOpponent);
+            var secondOpponent = GetBestSecondOpponent(playersOrdered, player1, player2, firstOpponent);
+            playersOrdered.Remove(secondOpponent);
+
+            return new List<Player>
+            {
+                firstOpponent,
+                secondOpponent,
+            };
+        }
+
+        private static Player GetBestFirstOpponent(List<Player> playersOrdered, Player player1, Player player2)
         {
             var potentialOpponents = new Dictionary<Player, float>();
             var numTocheck = Math.Min(playersOrdered.Count, Weights.Instance.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO);
@@ -69,48 +97,67 @@ namespace TournamentMatcher.GamePicking
 
                 var playerToConsider = playersOrdered[i];
                 var score = playerToConsider.GetOpponentSuitabilityScoreWithBands(player1, player2);
+                // Add points for best match
+                var scoreForMostBalancedGameYouCanMake = GetScoreForMostBalancedGame2(player1, player2, playerToConsider, playersOrdered);
+                score += (scoreForMostBalancedGameYouCanMake * scoreForMostBalancedGameYouCanMake) * Weights.Instance.BalancedTeams;
                 potentialOpponents.Add(playerToConsider, score);
             }
 
             var firstOpponent = GetRandomPlayerFromBestGroup(potentialOpponents);
-            potentialOpponents.Remove(firstOpponent.Key);
-
-            // Find partner
-            var newScores = AddScoreForPartnersWhoHavePlayedTogether(potentialOpponents, firstOpponent.Key);
-
-            var secondOpponent = GetRandomPlayerFromBestGroup(newScores);
-
-            return new List<Player>
-            {
-                firstOpponent.Key,
-                secondOpponent.Key
-            };
+            return firstOpponent;
         }
 
-        public static KeyValuePair<Player, float> GetRandomPlayerFromBestGroup(Dictionary<Player, float> players)
+        private static Player GetBestSecondOpponent(List<Player> playersOrdered, Player player1, Player player2, Player player3)
+        {
+            var potentialOpponents = new Dictionary<Player, float>();
+            var numTocheck = Math.Min(playersOrdered.Count, Weights.Instance.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO);
+            for (int i = 0; i < numTocheck; i++)
+            {
+                if (playersOrdered.Count < i)
+                {
+                    break;
+                }
+
+                var playerToConsider = playersOrdered[i];
+                var score = playerToConsider.GetOpponentSuitabilityScoreWithBands(player1, player2);
+                // Add points for best match
+                var handicapScore = GetScoreForGame(player1, player2, player3, playerToConsider);
+                score += (handicapScore * handicapScore) * Weights.Instance.BalancedTeams;
+                potentialOpponents.Add(playerToConsider, score);
+            }
+
+            var newScores = AddScoreForPartnersWhoHavePlayedTogether(potentialOpponents, player3);
+
+            var secondOpponent = GetRandomPlayerFromBestGroup(newScores);
+            return secondOpponent;
+        }
+
+        public static Player GetRandomPlayerFromBestGroup(Dictionary<Player, float> players)
         {
             var playersOrdered = players.OrderBy(kvp => kvp.Value).ToList();
             var bestScore = playersOrdered.First().Value;
             var bestPlayers = playersOrdered.TakeWhile(kvp => kvp.Value == bestScore).ToList();
             bestPlayers.Shuffle();
             var randomPlayer = bestPlayers.First();
-            return randomPlayer;
+            return randomPlayer.Key;
         }
 
-        public static Dictionary<Player, float> AddScoreForPartnersWhoHavePlayedTogether(Dictionary<Player, float> potentialPartners, Player p1)
+        public static Dictionary<Player, float> AddScoreForPartnersWhoHavePlayedTogether(Dictionary<Player, float> potentialPartners, Player player)
         {
             var retval = new Dictionary<Player, float>();
             foreach (var kvp in potentialPartners)
             {
                 var p2 = kvp.Key;
-                if (p2 == p1)
+                if (p2 == player)
                 {
                     retval.Add(p2, kvp.Value);
                 }
-
-                //                var partnerScore = GetBandedPartnerSkillDiff(p1, p2);
-                var partnerScore = p1.GetScoreIfIPlayWithPartner(p2);
-                retval.Add(p2, kvp.Value + partnerScore);
+                else
+                {
+                    //                var partnerScore = GetBandedPartnerSkillDiff(player, p2);
+                    var partnerScore = player.GetScoreIfIPlayWithPartner(p2);
+                    retval.Add(p2, kvp.Value + partnerScore);
+                }
             }
 
             return retval;
