@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using TournamentMatcher.Models;
@@ -33,11 +34,17 @@ namespace TournamentMatcher.GamePicking
 
             for (int i = 0; i < numRounds; i++)
             {
+                Debug.WriteLine("*** Creating Round " + i + " *******");
                 var currentRound = TournamentRound.CreateIntelligentRound(players);
 //                var currentRound = TournamentRound.CreateRandomRound(players);
                 newTournament.AddRound(currentRound);
-                Debug.WriteLine("*** Creating Round " + i + " *******");
             }
+
+            var playersNeedingExtraRound = TournamentRound.GetPlayersNeedingExtraRoundAndSitOutRest(players);
+
+            Debug.WriteLine("*** Creating Extra Round For Players That Sat Out *******");
+            var extraRound = TournamentRound.CreateIntelligentRound(playersNeedingExtraRound);
+            newTournament.AddRound(extraRound);
 
             newTournament.StoreScore();
 
@@ -75,38 +82,58 @@ namespace TournamentMatcher.GamePicking
             return avgScorePerRound*this.weightSimilarSkill + avgPartnerScore*this.weightDifferentPartners + avgOpponentScore*this.weightDifferentOpponents;
         }
 
-        public void PrintToDebug()
+        public void PrintToDebug(Action<string> alternativeOutput = null)
         {
             var rounds = this.SuggestedTournamentRounds.ToList();
+           
+            var outputFunc = new Action<string>(str => PrintMaybe(alternativeOutput, str));
 //            rounds.Shuffle();
 
             for (int i = 0; i < rounds.Count; i++)
             {
                 var suggestedTournamentRound = rounds[i];
-                Debug.WriteLine("");
-                Debug.WriteLine("ROUND " +(i+1));
-                Debug.WriteLine("-------");
+                outputFunc("");
+                outputFunc("ROUND " + (i + 1));
+                outputFunc("-------");
                 if (suggestedTournamentRound.PlayersSittingOut.Any())
                 {
-                    Debug.WriteLine("Sitting out: " + string.Join(", ", suggestedTournamentRound.PlayersSittingOut));
+                    outputFunc(" * Sitting out: " + string.Join(", ", suggestedTournamentRound.PlayersSittingOut));
                 }
                 foreach (var suggestedMatch in suggestedTournamentRound.SuggestedMatches)
                 {
-                    Debug.WriteLine(suggestedMatch.ToString());
+                    outputFunc(suggestedMatch.ToString());
                 }
             }
 
             foreach (var player in this.players.OrderBy(p => p.Handicap))
             {
-                Debug.WriteLine("");
-                Debug.WriteLine("-- " + player.GetNameWithHandicapString() + "--");
-                Debug.WriteLine("Partners: " + string.Join(", ", player.PartnersSoFar.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))));
-                Debug.WriteLine("Opponents: " + string.Join(", ", player.OpponentsSoFar.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))));
+                outputFunc("");
+                outputFunc("-- " + player.GetNameWithHandicapString() + "--");
+                outputFunc("Partners: " + string.Join(", ", player.PartnersSoFar.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))));
+                outputFunc("Opponents: " + string.Join(", ", player.OpponentsSoFar.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))));
                 var partnersMoreThanOnce = player.PartnersSoFar.Where(p => p.Value > 1);
                 var opponentsMoreThanOnce = player.OpponentsSoFar.Where(p => p.Value > 1);
 
-                Debug.WriteIf(partnersMoreThanOnce.Any(), "** Duplicate partners: " + string.Join(", ", partnersMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
-                Debug.WriteIf(opponentsMoreThanOnce.Any(), "** Duplicate opponents: " + string.Join(", ", opponentsMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+                if (partnersMoreThanOnce.Any())
+                {
+                    outputFunc("** Duplicate partners: " + string.Join(", ", partnersMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+                }
+                if (opponentsMoreThanOnce.Any())
+                {
+                    outputFunc("** Duplicate opponents: " + string.Join(", ", opponentsMoreThanOnce.Select(p => p.Key.GetNameWithHandicapString() + DisplayIfMoreThanOne(p.Value))) + "\n");
+                }
+            }
+        }
+
+        private void PrintMaybe(Action<string> alternativeOutput, string input)
+        {
+            if (alternativeOutput != null)
+            {
+                alternativeOutput(input);
+            }
+            else
+            {
+                Debug.WriteLine(input);
             }
         }
 

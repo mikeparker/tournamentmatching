@@ -44,6 +44,40 @@ namespace TournamentMatcher.GamePicking
             return round;
         }
 
+        public static List<Player> GetPlayersNeedingExtraRoundAndSitOutRest(List<Player> players)
+        {
+            var groups = players.GroupBy(p => p.NumberOfGamesSatOutSoFar).OrderByDescending(g => g.Key);
+            if (groups.Count() == 1)
+            {
+                return new List<Player>();
+            }
+
+            var playersNeedingExtraRound = groups.First().ToList();
+            var playersToChooseSubsFrom = groups.Skip(1).First().ToList();
+            playersToChooseSubsFrom.ForEach(p => p.NumberOfGamesSatOutSoFar++);
+            var subs = GetSubsForFinalRound(playersToChooseSubsFrom, playersNeedingExtraRound);
+//            subs.ForEach(p => p.Name += " (SUB)");
+            var playersPlusSubs = playersNeedingExtraRound.Concat(subs).ToList();
+            return playersPlusSubs;
+        }
+
+        private static List<Player> GetSubsForFinalRound(List<Player> playersToChooseSubsFrom, List<Player> playersNeedingExtraRound)
+        {
+            // TODO: Make a more intelligent sub-choosing function
+            var numberOfExtraPlayersNeeded = 4 - (playersNeedingExtraRound.Count % 4);
+            if (numberOfExtraPlayersNeeded == 4)
+            {
+                return new List<Player>();
+            }
+
+            var playersInOrder = playersNeedingExtraRound.OrderBy(p => p.Handicap);
+            var maxHandicap = playersInOrder.First().Handicap;
+            var minHandicap = playersInOrder.Last().Handicap;
+            var averageHandicap = (maxHandicap + minHandicap) / 2;
+            var subsInOrder = playersToChooseSubsFrom.OrderBy(p => Math.Abs(p.Handicap - averageHandicap));
+            return subsInOrder.Take(numberOfExtraPlayersNeeded).ToList();
+        }
+
         private static List<Player> CalculatePlayersSittingOutNext(List<Player> players)
         {
             var numSittingOutPerRound = players.Count % 4;

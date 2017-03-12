@@ -109,7 +109,6 @@ namespace TournamentMatcher.Tests
             y.Add(new Player("Karl Wycherley", -2));
             y.Add(new Player("Kasia Zalewska", -1));
             y.Add(new Player("Sense", -3));
-
         }
 
         private void AddMen(List<Player> y)

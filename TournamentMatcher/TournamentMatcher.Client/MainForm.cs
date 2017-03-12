@@ -30,7 +30,7 @@ namespace TournamentMatcher.Client
             {
                 return;
             }
-            AddRemovePlayersForm x = new AddRemovePlayersForm();
+            var x = new AddRemovePlayersForm();
             x.SetModel(this.tournamentClientModel);
             x.ShowDialog(this);
         }
@@ -79,12 +79,18 @@ namespace TournamentMatcher.Client
             }
 
             tournamentClientModel.FinaliseCurrentRoundAndGenerateNext();
-            this.dgvNextRound.DataSource = tournamentClientModel.CurrentRoundBindingList;
-            this.dgvGamesPlayed.DataSource = tournamentClientModel.PreviousRoundsBindingList;
-            this.lblSittingOut.Text = "Sitting out:" + string.Join(", ", tournamentClientModel.CurrentRound.PlayersSittingOut.Select(p => p.Name));
-            dgvGamesPlayed.SetNotColumnSortable();
-            dgvNextRound.SetNotColumnSortable();
-            dgvGamesPlayed.SetColumnEditable(2);
+            RefreshUI();
+        }
+
+        private void RefreshUI()
+        {
+            this.dgvNextRound.DataSource = this.tournamentClientModel.CurrentRoundBindingList;
+            this.dgvGamesPlayed.DataSource = this.tournamentClientModel.PreviousRoundsBindingList;
+            this.label2.Text = "Next Round (" + (this.tournamentClientModel.PreviousRounds.Count + 1) + ")";
+            this.lblSittingOut.Text = "Sitting out:" + string.Join(", ", this.tournamentClientModel.CurrentRound.PlayersSittingOut.Select(p => p.Name));
+            this.dgvGamesPlayed.SetNotColumnSortable();
+            this.dgvNextRound.SetNotColumnSortable();
+            this.dgvGamesPlayed.SetColumnEditable(2);
         }
 
         private void openHandicapsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -104,8 +110,26 @@ namespace TournamentMatcher.Client
 
         private void tournamentSettingsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            var x = new Settings();
+            var x = new Settings(this.tournamentClientModel.PlayersInTournament);
             x.ShowDialog(this);
+        }
+
+        private void btnGenerateFinalRound_Click(object sender, EventArgs e)
+        {
+            if (!tournamentClientModel.PlayersBindingList.Any())
+            {
+                MessageBox.Show("Please select players before trying to generate a round.");
+                return;
+            }
+
+            var dialogResult = MessageBox.Show(this, "Finalise round and create the FINAL ROUND?", "FINAL ROUND?", MessageBoxButtons.OKCancel);
+            if (dialogResult == DialogResult.Cancel)
+            {
+                return;
+            }
+
+            tournamentClientModel.FinaliseCurrentRoundAndGenerateFinalRound();
+            RefreshUI();
         }
     }
 }

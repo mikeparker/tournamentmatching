@@ -9,9 +9,10 @@ namespace TournamentMatcher.Models
     [DebuggerDisplay("{Name}")]
     public class Player
     {
-        public string Name { get; private set; }
+        public string Name { get; set; }
         public float Handicap { get; private set; }
         public int NumberOfGamesSatOutSoFar { get; set; }
+        public List<Match> MatchesPlayed { get; set; }
         public Dictionary<Player, int> PartnersSoFar { get; private set; } 
         public Dictionary<Player, int> OpponentsSoFar { get; private set; } 
 
@@ -21,6 +22,7 @@ namespace TournamentMatcher.Models
             this.Handicap = handicap;
             this.PartnersSoFar = new Dictionary<Player, int>();
             this.OpponentsSoFar = new Dictionary<Player, int>();
+            this.MatchesPlayed = new List<Match>();
         }
 
         public float GetScoreForHandicapDifference(float otherHandicap)
@@ -202,6 +204,11 @@ namespace TournamentMatcher.Models
         public string GetNameWithHandicapString()
         {
             return this.Name + " (" + this.Handicap + ")";
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

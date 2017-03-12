@@ -45,6 +45,7 @@
             this.addRemovePlayersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tournamentSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnGenerateFinalRound = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNextRound)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGamesPlayed)).BeginInit();
@@ -54,10 +55,9 @@
             // btnAddPlayers
             // 
             this.btnAddPlayers.Enabled = false;
-            this.btnAddPlayers.Location = new System.Drawing.Point(185, 570);
-            this.btnAddPlayers.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddPlayers.Location = new System.Drawing.Point(139, 452);
             this.btnAddPlayers.Name = "btnAddPlayers";
-            this.btnAddPlayers.Size = new System.Drawing.Size(171, 32);
+            this.btnAddPlayers.Size = new System.Drawing.Size(128, 37);
             this.btnAddPlayers.TabIndex = 0;
             this.btnAddPlayers.Text = "Add/Remove Players";
             this.btnAddPlayers.UseVisualStyleBackColor = true;
@@ -66,19 +66,17 @@
             // dgvPlayers
             // 
             this.dgvPlayers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPlayers.Location = new System.Drawing.Point(16, 67);
-            this.dgvPlayers.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvPlayers.Location = new System.Drawing.Point(12, 54);
             this.dgvPlayers.Name = "dgvPlayers";
             this.dgvPlayers.RowHeadersVisible = false;
-            this.dgvPlayers.Size = new System.Drawing.Size(280, 405);
+            this.dgvPlayers.Size = new System.Drawing.Size(210, 329);
             this.dgvPlayers.TabIndex = 1;
             // 
             // btnLoadHandicaps
             // 
-            this.btnLoadHandicaps.Location = new System.Drawing.Point(15, 570);
-            this.btnLoadHandicaps.Margin = new System.Windows.Forms.Padding(4);
+            this.btnLoadHandicaps.Location = new System.Drawing.Point(11, 452);
             this.btnLoadHandicaps.Name = "btnLoadHandicaps";
-            this.btnLoadHandicaps.Size = new System.Drawing.Size(163, 32);
+            this.btnLoadHandicaps.Size = new System.Drawing.Size(122, 37);
             this.btnLoadHandicaps.TabIndex = 2;
             this.btnLoadHandicaps.Text = "Load Handicaps File";
             this.btnLoadHandicaps.UseVisualStyleBackColor = true;
@@ -91,10 +89,9 @@
             // 
             // btnGenerateNextRound
             // 
-            this.btnGenerateNextRound.Location = new System.Drawing.Point(683, 570);
-            this.btnGenerateNextRound.Margin = new System.Windows.Forms.Padding(4);
+            this.btnGenerateNextRound.Location = new System.Drawing.Point(712, 452);
             this.btnGenerateNextRound.Name = "btnGenerateNextRound";
-            this.btnGenerateNextRound.Size = new System.Drawing.Size(171, 32);
+            this.btnGenerateNextRound.Size = new System.Drawing.Size(128, 37);
             this.btnGenerateNextRound.TabIndex = 3;
             this.btnGenerateNextRound.Text = "Generate Next Round";
             this.btnGenerateNextRound.UseVisualStyleBackColor = true;
@@ -103,61 +100,55 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 46);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(136, 17);
+            this.label1.Size = new System.Drawing.Size(101, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Tournament Players";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(680, 46);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(709, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 17);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 4;
             this.label2.Text = "Next Round";
             // 
             // dgvNextRound
             // 
             this.dgvNextRound.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvNextRound.Location = new System.Drawing.Point(683, 67);
-            this.dgvNextRound.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvNextRound.Location = new System.Drawing.Point(712, 54);
             this.dgvNextRound.Name = "dgvNextRound";
             this.dgvNextRound.RowHeadersVisible = false;
             this.dgvNextRound.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.dgvNextRound.Size = new System.Drawing.Size(464, 405);
+            this.dgvNextRound.Size = new System.Drawing.Size(577, 329);
             this.dgvNextRound.TabIndex = 5;
             // 
             // dgvGamesPlayed
             // 
             this.dgvGamesPlayed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvGamesPlayed.Location = new System.Drawing.Point(304, 67);
-            this.dgvGamesPlayed.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvGamesPlayed.Location = new System.Drawing.Point(228, 54);
             this.dgvGamesPlayed.Name = "dgvGamesPlayed";
             this.dgvGamesPlayed.RowHeadersVisible = false;
-            this.dgvGamesPlayed.Size = new System.Drawing.Size(371, 405);
+            this.dgvGamesPlayed.Size = new System.Drawing.Size(478, 329);
             this.dgvGamesPlayed.TabIndex = 5;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(301, 46);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(226, 37);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 17);
+            this.label3.Size = new System.Drawing.Size(75, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Games Played";
             // 
             // lblSittingOut
             // 
             this.lblSittingOut.AutoSize = true;
-            this.lblSittingOut.Location = new System.Drawing.Point(680, 480);
-            this.lblSittingOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSittingOut.Location = new System.Drawing.Point(510, 390);
             this.lblSittingOut.Name = "lblSittingOut";
-            this.lblSittingOut.Size = new System.Drawing.Size(0, 17);
+            this.lblSittingOut.Size = new System.Drawing.Size(0, 13);
             this.lblSittingOut.TabIndex = 6;
             // 
             // menuStrip1
@@ -167,7 +158,8 @@
             this.menuFile});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1160, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1301, 24);
             this.menuStrip1.TabIndex = 9;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -179,42 +171,53 @@
             this.tournamentSettingsToolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.menuFile.Name = "menuFile";
-            this.menuFile.Size = new System.Drawing.Size(44, 24);
+            this.menuFile.Size = new System.Drawing.Size(37, 20);
             this.menuFile.Text = "File";
             // 
             // openHandicapsToolStripMenuItem
             // 
             this.openHandicapsToolStripMenuItem.Name = "openHandicapsToolStripMenuItem";
-            this.openHandicapsToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.openHandicapsToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.openHandicapsToolStripMenuItem.Text = "Open Handicaps";
             this.openHandicapsToolStripMenuItem.Click += new System.EventHandler(this.openHandicapsToolStripMenuItem_Click);
             // 
             // addRemovePlayersToolStripMenuItem
             // 
             this.addRemovePlayersToolStripMenuItem.Name = "addRemovePlayersToolStripMenuItem";
-            this.addRemovePlayersToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.addRemovePlayersToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.addRemovePlayersToolStripMenuItem.Text = "Add/Remove players";
             this.addRemovePlayersToolStripMenuItem.Click += new System.EventHandler(this.addRemovePlayersToolStripMenuItem_Click);
             // 
             // tournamentSettingsToolStripMenuItem1
             // 
             this.tournamentSettingsToolStripMenuItem1.Name = "tournamentSettingsToolStripMenuItem1";
-            this.tournamentSettingsToolStripMenuItem1.Size = new System.Drawing.Size(223, 26);
+            this.tournamentSettingsToolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
             this.tournamentSettingsToolStripMenuItem1.Text = "Tournament Settings";
             this.tournamentSettingsToolStripMenuItem1.Click += new System.EventHandler(this.tournamentSettingsToolStripMenuItem1_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(223, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // btnGenerateFinalRound
+            // 
+            this.btnGenerateFinalRound.Location = new System.Drawing.Point(1161, 452);
+            this.btnGenerateFinalRound.Name = "btnGenerateFinalRound";
+            this.btnGenerateFinalRound.Size = new System.Drawing.Size(128, 37);
+            this.btnGenerateFinalRound.TabIndex = 10;
+            this.btnGenerateFinalRound.Text = "Generate FINAL Round";
+            this.btnGenerateFinalRound.UseVisualStyleBackColor = true;
+            this.btnGenerateFinalRound.Click += new System.EventHandler(this.btnGenerateFinalRound_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1160, 617);
+            this.ClientSize = new System.Drawing.Size(1301, 501);
+            this.Controls.Add(this.btnGenerateFinalRound);
             this.Controls.Add(this.lblSittingOut);
             this.Controls.Add(this.dgvGamesPlayed);
             this.Controls.Add(this.dgvNextRound);
@@ -227,7 +230,6 @@
             this.Controls.Add(this.btnAddPlayers);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Mikes Amazing Badminton Tournament Program";
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlayers)).EndInit();
@@ -259,6 +261,7 @@
         private System.Windows.Forms.ToolStripMenuItem addRemovePlayersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tournamentSettingsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.Button btnGenerateFinalRound;
     }
 }
 

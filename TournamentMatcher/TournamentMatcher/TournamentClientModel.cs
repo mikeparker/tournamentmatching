@@ -53,15 +53,27 @@ namespace TournamentMatcher
         public void FinaliseCurrentRoundAndGenerateNext()
         {
             var nextRound = TournamentRound.CreateIntelligentRound(PlayersBindingList.ToList());
-            if (CurrentRound != null)
+            FinaliseCurrentRound(nextRound);
+        }
+
+        public void FinaliseCurrentRoundAndGenerateFinalRound()
+        {
+            var playersNeedingExtraRound = TournamentRound.GetPlayersNeedingExtraRoundAndSitOutRest(PlayersBindingList.ToList());
+
+            var extraRound = TournamentRound.CreateIntelligentRound(playersNeedingExtraRound);
+            FinaliseCurrentRound(extraRound);
+        }
+
+        private void FinaliseCurrentRound(TournamentRound nextRound)
+        {
+            if (this.CurrentRound != null)
             {
-                this.PreviousRounds.Add(CurrentRound);
-                foreach (var suggestedMatch in CurrentRound.SuggestedMatches)
+                this.PreviousRounds.Add(this.CurrentRound);
+                foreach (var suggestedMatch in this.CurrentRound.SuggestedMatches)
                 {
-                    PreviousRoundsBindingList.Add(suggestedMatch);
+                    this.PreviousRoundsBindingList.Add(suggestedMatch);
                 }
             }
-
             CurrentRound = nextRound;
             CurrentRoundBindingList.Clear();
             foreach (var suggestedMatch in CurrentRound.SuggestedMatches)

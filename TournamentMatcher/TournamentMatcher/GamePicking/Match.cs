@@ -64,6 +64,15 @@ namespace TournamentMatcher.GamePicking
         private void Finalise()
         {
             this.Team1.FinaliseGame(Team2);
+            this.FinaliseMatchPerPlayer();
+        }
+
+        private void FinaliseMatchPerPlayer()
+        {
+            Team1.Player1.MatchesPlayed.Add(this);
+            Team1.Player2.MatchesPlayed.Add(this);
+            Team2.Player1.MatchesPlayed.Add(this);
+            Team2.Player2.MatchesPlayed.Add(this);
         }
 
         private static List<Player> FindBestOpponentsAndMakeMatch(List<Player> playersOrdered, Player initialPlayer, Player bestPartner, out Match match)

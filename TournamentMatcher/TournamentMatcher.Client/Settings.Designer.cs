@@ -39,6 +39,7 @@
             this.sliderPartnerSkillDiff = new System.Windows.Forms.TrackBar();
             this.lblOpponentSkillDiff = new System.Windows.Forms.Label();
             this.sliderOpponentSkillDiff = new System.Windows.Forms.TrackBar();
+            this.btnGenerateExampleTournament = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.sliderPartnerVariation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderOpponentVariation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderPartnerSkillDiff)).BeginInit();
@@ -47,9 +48,10 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(453, 370);
+            this.btnSave.Location = new System.Drawing.Point(340, 301);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(101, 40);
+            this.btnSave.Size = new System.Drawing.Size(76, 32);
             this.btnSave.TabIndex = 0;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -57,9 +59,10 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(560, 370);
+            this.btnCancel.Location = new System.Drawing.Point(420, 301);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(101, 40);
+            this.btnCancel.Size = new System.Drawing.Size(76, 32);
             this.btnCancel.TabIndex = 1;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -68,10 +71,11 @@
             // sliderPartnerVariation
             // 
             this.sliderPartnerVariation.LargeChange = 20;
-            this.sliderPartnerVariation.Location = new System.Drawing.Point(216, 68);
+            this.sliderPartnerVariation.Location = new System.Drawing.Point(162, 55);
+            this.sliderPartnerVariation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sliderPartnerVariation.Maximum = 200;
             this.sliderPartnerVariation.Name = "sliderPartnerVariation";
-            this.sliderPartnerVariation.Size = new System.Drawing.Size(242, 56);
+            this.sliderPartnerVariation.Size = new System.Drawing.Size(182, 45);
             this.sliderPartnerVariation.SmallChange = 10;
             this.sliderPartnerVariation.TabIndex = 2;
             this.sliderPartnerVariation.TickFrequency = 20;
@@ -80,17 +84,19 @@
             // lblPartnerVariation
             // 
             this.lblPartnerVariation.AutoSize = true;
-            this.lblPartnerVariation.Location = new System.Drawing.Point(24, 68);
+            this.lblPartnerVariation.Location = new System.Drawing.Point(18, 55);
+            this.lblPartnerVariation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPartnerVariation.Name = "lblPartnerVariation";
-            this.lblPartnerVariation.Size = new System.Drawing.Size(115, 17);
+            this.lblPartnerVariation.Size = new System.Drawing.Size(85, 13);
             this.lblPartnerVariation.TabIndex = 3;
             this.lblPartnerVariation.Text = "Partner Variation";
             // 
             // btnResetDefaults
             // 
-            this.btnResetDefaults.Location = new System.Drawing.Point(12, 370);
+            this.btnResetDefaults.Location = new System.Drawing.Point(9, 301);
+            this.btnResetDefaults.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnResetDefaults.Name = "btnResetDefaults";
-            this.btnResetDefaults.Size = new System.Drawing.Size(127, 40);
+            this.btnResetDefaults.Size = new System.Drawing.Size(95, 32);
             this.btnResetDefaults.TabIndex = 4;
             this.btnResetDefaults.Text = "Reset to defaults";
             this.btnResetDefaults.UseVisualStyleBackColor = true;
@@ -99,19 +105,21 @@
             // lblOpponentVariation
             // 
             this.lblOpponentVariation.AutoSize = true;
-            this.lblOpponentVariation.Location = new System.Drawing.Point(24, 121);
+            this.lblOpponentVariation.Location = new System.Drawing.Point(18, 98);
+            this.lblOpponentVariation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOpponentVariation.Name = "lblOpponentVariation";
-            this.lblOpponentVariation.Size = new System.Drawing.Size(131, 17);
+            this.lblOpponentVariation.Size = new System.Drawing.Size(98, 13);
             this.lblOpponentVariation.TabIndex = 6;
             this.lblOpponentVariation.Text = "Opponent Variation";
             // 
             // sliderOpponentVariation
             // 
             this.sliderOpponentVariation.LargeChange = 20;
-            this.sliderOpponentVariation.Location = new System.Drawing.Point(216, 121);
+            this.sliderOpponentVariation.Location = new System.Drawing.Point(162, 98);
+            this.sliderOpponentVariation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sliderOpponentVariation.Maximum = 200;
             this.sliderOpponentVariation.Name = "sliderOpponentVariation";
-            this.sliderOpponentVariation.Size = new System.Drawing.Size(242, 56);
+            this.sliderOpponentVariation.Size = new System.Drawing.Size(182, 45);
             this.sliderOpponentVariation.SmallChange = 20;
             this.sliderOpponentVariation.TabIndex = 5;
             this.sliderOpponentVariation.TickFrequency = 20;
@@ -120,45 +128,61 @@
             // lblPartnerSkillDifference
             // 
             this.lblPartnerSkillDifference.AutoSize = true;
-            this.lblPartnerSkillDifference.Location = new System.Drawing.Point(24, 183);
+            this.lblPartnerSkillDifference.Location = new System.Drawing.Point(18, 149);
+            this.lblPartnerSkillDifference.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPartnerSkillDifference.Name = "lblPartnerSkillDifference";
-            this.lblPartnerSkillDifference.Size = new System.Drawing.Size(109, 17);
+            this.lblPartnerSkillDifference.Size = new System.Drawing.Size(82, 13);
             this.lblPartnerSkillDifference.TabIndex = 8;
             this.lblPartnerSkillDifference.Text = "Partner Skill Diff";
             // 
             // sliderPartnerSkillDiff
             // 
-            this.sliderPartnerSkillDiff.Location = new System.Drawing.Point(216, 183);
+            this.sliderPartnerSkillDiff.Location = new System.Drawing.Point(162, 149);
+            this.sliderPartnerSkillDiff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sliderPartnerSkillDiff.Maximum = 50;
             this.sliderPartnerSkillDiff.Name = "sliderPartnerSkillDiff";
-            this.sliderPartnerSkillDiff.Size = new System.Drawing.Size(242, 56);
+            this.sliderPartnerSkillDiff.Size = new System.Drawing.Size(182, 45);
             this.sliderPartnerSkillDiff.TabIndex = 7;
             this.sliderPartnerSkillDiff.ValueChanged += new System.EventHandler(this.sliderPartnerSkillDiff_ValueChanged);
             // 
             // lblOpponentSkillDiff
             // 
             this.lblOpponentSkillDiff.AutoSize = true;
-            this.lblOpponentSkillDiff.Location = new System.Drawing.Point(24, 245);
+            this.lblOpponentSkillDiff.Location = new System.Drawing.Point(18, 199);
+            this.lblOpponentSkillDiff.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblOpponentSkillDiff.Name = "lblOpponentSkillDiff";
-            this.lblOpponentSkillDiff.Size = new System.Drawing.Size(125, 17);
+            this.lblOpponentSkillDiff.Size = new System.Drawing.Size(95, 13);
             this.lblOpponentSkillDiff.TabIndex = 10;
             this.lblOpponentSkillDiff.Text = "Opponent Skill Diff";
             // 
             // sliderOpponentSkillDiff
             // 
             this.sliderOpponentSkillDiff.LargeChange = 1;
-            this.sliderOpponentSkillDiff.Location = new System.Drawing.Point(216, 245);
+            this.sliderOpponentSkillDiff.Location = new System.Drawing.Point(162, 199);
+            this.sliderOpponentSkillDiff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.sliderOpponentSkillDiff.Maximum = 50;
             this.sliderOpponentSkillDiff.Name = "sliderOpponentSkillDiff";
-            this.sliderOpponentSkillDiff.Size = new System.Drawing.Size(242, 56);
+            this.sliderOpponentSkillDiff.Size = new System.Drawing.Size(182, 45);
             this.sliderOpponentSkillDiff.TabIndex = 9;
             this.sliderOpponentSkillDiff.ValueChanged += new System.EventHandler(this.sliderOpponentSkillDiff_ValueChanged);
             // 
+            // btnGenerateExampleTournament
+            // 
+            this.btnGenerateExampleTournament.Location = new System.Drawing.Point(404, 112);
+            this.btnGenerateExampleTournament.Margin = new System.Windows.Forms.Padding(2);
+            this.btnGenerateExampleTournament.Name = "btnGenerateExampleTournament";
+            this.btnGenerateExampleTournament.Size = new System.Drawing.Size(76, 82);
+            this.btnGenerateExampleTournament.TabIndex = 11;
+            this.btnGenerateExampleTournament.Text = "Generate Example Tournament";
+            this.btnGenerateExampleTournament.UseVisualStyleBackColor = true;
+            this.btnGenerateExampleTournament.Click += new System.EventHandler(this.btnGenerateExampleTournament_Click);
+            // 
             // Settings
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 422);
+            this.ClientSize = new System.Drawing.Size(505, 343);
+            this.Controls.Add(this.btnGenerateExampleTournament);
             this.Controls.Add(this.lblOpponentSkillDiff);
             this.Controls.Add(this.sliderOpponentSkillDiff);
             this.Controls.Add(this.lblPartnerSkillDifference);
@@ -170,6 +194,7 @@
             this.Controls.Add(this.sliderPartnerVariation);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Settings";
             this.Text = "Settings";
             ((System.ComponentModel.ISupportInitialize)(this.sliderPartnerVariation)).EndInit();
@@ -194,5 +219,6 @@
         private System.Windows.Forms.TrackBar sliderPartnerSkillDiff;
         private System.Windows.Forms.Label lblOpponentSkillDiff;
         private System.Windows.Forms.TrackBar sliderOpponentSkillDiff;
+        private System.Windows.Forms.Button btnGenerateExampleTournament;
     }
 }
