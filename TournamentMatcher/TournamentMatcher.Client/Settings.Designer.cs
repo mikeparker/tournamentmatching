@@ -57,16 +57,20 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.lblMaxPartnerDistance = new System.Windows.Forms.Label();
+            this.sliderMaxPartnerDistance = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.sliderPartnerVariation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderOpponentVariation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderPartnerSkillDiff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderOpponentSkillDiff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBalancedTeams)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderMaxPartnerDistance)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(547, 523);
+            this.btnSave.Location = new System.Drawing.Point(547, 606);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(76, 32);
@@ -77,7 +81,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(627, 523);
+            this.btnCancel.Location = new System.Drawing.Point(627, 606);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(76, 32);
@@ -112,7 +116,7 @@
             // 
             // btnResetDefaults
             // 
-            this.btnResetDefaults.Location = new System.Drawing.Point(250, 523);
+            this.btnResetDefaults.Location = new System.Drawing.Point(253, 606);
             this.btnResetDefaults.Margin = new System.Windows.Forms.Padding(2);
             this.btnResetDefaults.Name = "btnResetDefaults";
             this.btnResetDefaults.Size = new System.Drawing.Size(95, 32);
@@ -372,11 +376,47 @@
             this.label15.TabIndex = 31;
             this.label15.Text = "As small as possible (balanced teams)->";
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(23, 518);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(470, 13);
+            this.label18.TabIndex = 34;
+            this.label18.Text = "Only consider the closest X partners. Useful for when partner skill diff 0 but li" +
+    "miting really silly games";
+            // 
+            // lblMaxPartnerDistance
+            // 
+            this.lblMaxPartnerDistance.AutoSize = true;
+            this.lblMaxPartnerDistance.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaxPartnerDistance.Location = new System.Drawing.Point(20, 486);
+            this.lblMaxPartnerDistance.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMaxPartnerDistance.Name = "lblMaxPartnerDistance";
+            this.lblMaxPartnerDistance.Size = new System.Drawing.Size(188, 13);
+            this.lblMaxPartnerDistance.TabIndex = 33;
+            this.lblMaxPartnerDistance.Text = "Partner Variation - max distance";
+            // 
+            // sliderMaxPartnerDistance
+            // 
+            this.sliderMaxPartnerDistance.LargeChange = 10;
+            this.sliderMaxPartnerDistance.Location = new System.Drawing.Point(253, 486);
+            this.sliderMaxPartnerDistance.Margin = new System.Windows.Forms.Padding(2);
+            this.sliderMaxPartnerDistance.Maximum = 50;
+            this.sliderMaxPartnerDistance.Name = "sliderMaxPartnerDistance";
+            this.sliderMaxPartnerDistance.Size = new System.Drawing.Size(313, 45);
+            this.sliderMaxPartnerDistance.TabIndex = 32;
+            this.sliderMaxPartnerDistance.ValueChanged += new System.EventHandler(this.sliderMaxPartnerDistance_ValueChanged);
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(714, 566);
+            this.ClientSize = new System.Drawing.Size(714, 649);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.lblMaxPartnerDistance);
+            this.Controls.Add(this.sliderMaxPartnerDistance);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label5);
@@ -415,6 +455,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.sliderPartnerSkillDiff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderOpponentSkillDiff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sliderBalancedTeams)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sliderMaxPartnerDistance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,5 +492,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label lblMaxPartnerDistance;
+        private System.Windows.Forms.TrackBar sliderMaxPartnerDistance;
     }
 }

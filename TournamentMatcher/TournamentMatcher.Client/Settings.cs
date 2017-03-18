@@ -25,6 +25,7 @@ namespace TournamentMatcher.Client
             sliderPartnerSkillDiff.Value = (int) (Weights.Instance.SkillDifferenceForPartner*10);
             sliderOpponentSkillDiff.Value = (int) (Weights.Instance.SkillDifferenceForOpponent*10);
             sliderBalancedTeams.Value = (int) (Weights.Instance.BalancedTeams*10);
+            sliderMaxPartnerDistance.Value = Weights.Instance.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO;
         }
 
         private void btnResetDefaults_Click(object sender, EventArgs e)
@@ -51,6 +52,7 @@ namespace TournamentMatcher.Client
             Weights.Instance.SkillDifferenceForPartner = this.sliderPartnerSkillDiff.Value / 10f;
             Weights.Instance.SkillDifferenceForOpponent = this.sliderOpponentSkillDiff.Value / 10f;
             Weights.Instance.BalancedTeams = this.sliderBalancedTeams.Value / 10f;
+            Weights.Instance.MAX_PLAYERS_BELOW_TOP_TO_STRETCH_TO = this.sliderMaxPartnerDistance.Value;
         }
 
         private void slider1_ValueChanged(object sender, EventArgs e)
@@ -76,6 +78,11 @@ namespace TournamentMatcher.Client
         private void sliderBalancedTeams_ValueChanged(object sender, EventArgs e)
         {
             lblBalancedTeams.Text = "Balanced Teams : " + sliderBalancedTeams.Value;
+        }
+
+        private void sliderMaxPartnerDistance_ValueChanged(object sender, EventArgs e)
+        {
+            lblMaxPartnerDistance.Text = "Partner Variation - Max Distance : " + sliderMaxPartnerDistance.Value;
         }
 
         private void btnGenerateExampleTournament_Click(object sender, EventArgs e)

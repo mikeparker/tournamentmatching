@@ -89,7 +89,7 @@ namespace TournamentMatcher.Models
             return this.OpponentsSoFar.Sum(kvp => (kvp.Value - 1) * (kvp.Value - 1)); // no idea if this is good
         }
 
-        public float GetScoreIfIPlayWithPartner(Player p2)
+        public float GetPartnerVariationScore(Player p2)
         {
             var x = GetTimesPartnered(p2);
 
@@ -104,7 +104,7 @@ namespace TournamentMatcher.Models
 
             var skillDifferenceBanded = GetBandedPartnerSkillDiff(p2);
 
-            var partnerScore = GetScoreIfIPlayWithPartner(p2);
+            var partnerScore = GetPartnerVariationScore(p2);
 
             var skillScoreWeighted = skillDifferenceBanded * Weights.Instance.SkillDifferenceForPartner;
             return skillScoreWeighted + partnerScore;
@@ -174,7 +174,7 @@ namespace TournamentMatcher.Models
             // Consider how many times you've partnered
             // Consider skill difference
             var skillDifference = GetScoreForHandicapDifference(p2.Handicap);
-            var partnerScore = GetScoreIfIPlayWithPartner(p2);
+            var partnerScore = GetPartnerVariationScore(p2);
 
             var skillScoreWeighted = skillDifference * Weights.Instance.SkillDifferenceForPartner;
             return skillScoreWeighted + partnerScore;
