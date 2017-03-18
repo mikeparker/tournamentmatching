@@ -4,7 +4,7 @@ Naomi Bowman, -2
 Jack Boyns, -8
 Peter Clapham, -1
 Samuel Crabb, -1
-Martin Crossley, -11
+Martin Crossley, -14
 Zephanie Curgenven, -2
 Jack Curtis, -11
 Paul Davies, -2
@@ -32,7 +32,7 @@ Vivek Mishra, -2
 Mark Nelid, -1
 Lorne Noble, 1
 Chris Parker, -9
-Mike Parker, -13
+Mike Parker, -8
 Simon Parker, -12
 Rodolph Perfetta, -3
 Bridget Pickup, 2
@@ -58,6 +58,9 @@ Lynn Trowell, -3
 Andy Turley, -8
 Paul Upton, -1
 Ian White, -7
+Mike W, -8
+New James, -9
+New Guy, -15
 Andy Williamson, -5
 Richard Wilson, -1
 Becca Wisden, -2

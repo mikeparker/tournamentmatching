@@ -71,9 +71,20 @@ namespace TournamentMatcher.GamePicking
         {
             var playersCopy = players.ToList();
             playersCopy.Remove(player3);
+            int lowestScore = 9999;
 
-            var player4 = playersCopy[0];
-            return GetScoreForGame(player1, player2, player3, player4);
+            var remainingPlayers = players.ToList();
+            foreach (var opp2 in remainingPlayers)
+            {
+                var score = GetScoreForGame(player1, player2, player3, opp2);
+                if (score == 0) return 0;
+                if (score < lowestScore)
+                {
+                    lowestScore = score;
+                }
+            }
+
+            return lowestScore;
         }
 
         public static int GetScoreForGame(Player player1, Player player2, Player player3, Player player4)

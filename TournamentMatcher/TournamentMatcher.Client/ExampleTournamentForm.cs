@@ -15,5 +15,10 @@ namespace TournamentMatcher.Client
         {
             this.Close();
         }
+
+        private void listBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Clipboard.SetText(listBox1.Items[listBox1.SelectedIndex].ToString());
+       }
     }
 }
