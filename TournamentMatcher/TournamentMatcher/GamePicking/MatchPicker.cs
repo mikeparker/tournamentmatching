@@ -47,11 +47,24 @@ namespace TournamentMatcher.GamePicking
         {
             var playersCopy = players.ToList();
             playersCopy.Remove(playerToConsider);
+            int lowestScore = 9999; 
 
-            var opp1 = playersCopy[0];
-            var opp2 = playersCopy[1];
+            foreach (var opp1 in players)
+            {
+                var remainingPlayers = players.ToList();
+                remainingPlayers.Remove(opp1);
+                foreach (var opp2 in remainingPlayers)
+                {
+                    var score = GetScoreForGame(player, playerToConsider, opp1, opp2);
+                    if (score == 0) return 0;
+                    if (score < lowestScore)
+                    {
+                        lowestScore = score;
+                    }
+                }
+            }
 
-            return GetScoreForGame(player, playerToConsider, opp1, opp2);
+            return lowestScore;
         }
 
         public static int GetScoreForMostBalancedGame2(Player player1, Player player2, Player player3, List<Player> players)
@@ -155,7 +168,7 @@ namespace TournamentMatcher.GamePicking
                 else
                 {
                     //                var partnerScore = GetBandedPartnerSkillDiff(player, p2);
-                    var partnerScore = player.GetScoreIfIPlayWithPartner(p2);
+                    var partnerScore = player.GetPartnerVariationScore(p2);
                     retval.Add(p2, kvp.Value + partnerScore);
                 }
             }
